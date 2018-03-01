@@ -1,0 +1,2500 @@
+-007 STATEMENT CONTAINS THE ILLEGAL CHARACTER
+character
+Explanation: The specified 'character' is not a valid character
+in SQL statements.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the syntax and resubmit the
+statement. Refer to Chapter 3 of DB2 SQL Reference for information
+about the valid SQL character set.
+Destination: 42601
+-010 THE STRING CONSTANT BEGINNING string IS
+NOT TERMINATED
+Explanation: The statement contains a string constant,
+beginning with 'string', that is not terminated properly.
+System Action: The statement cannot be executed.
+Programmer Response: Examine the statement for missing
+quotation marks or apostrophes in the indicated string constant.
+Destination: 42603
+-029 INTO CLAUSE REQUIRED
+Explanation: SELECT statements embedded in an application
+program must have an INTO clause to denote where the
+results of the SELECT are to be placed. Dynamic SELECT
+statements do not permit the INTO clause.
+System Action: The statement cannot be executed.
+Programmer Response: Add the INTO clause to the
+SELECT statement and precompile the application program
+again.
+Destination: 42601
+-060 INVALID type SPECIFICATION : spec
+Explanation: 'type' is either LENGTH or SCALE. 'spec' is
+the specified length or scale. Length or scale must be specified
+by an unsigned integer constant and the value must be in the
+range allowed by the data type.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the statement. Refer to
+Chapter 3 of DB2 SQL Reference for rules for length and
+scale.
+Destination: 42815
+# -079 QUALIFIER FOR DECLARED GLOBAL TEMPO#
+RARY TABLE table-name MUST BE SESSION,
+# NOT qualifier
+# Explanation: The qualifier for a declared temporary table
+# must be SESSION. The DECLARE GLOBAL TEMPORARY
+# TABLE statement defines a new temporary table named table#
+name with an explicit qualifier of qualifier. Specifying a qual#
+ifier other than SESSION is not allowed.
+# System Action: The statement was not executed.
+# Programmer Response: Change the statement in one of the
+# following ways:
+#  Change the qualifier to SESSION.
+#  Remove the qualifier, and let DB2 default it to SESSION.
+# Destination: 428EK
+-084 UNACCEPTABLE SQL STATEMENT
+Explanation: This SQL statement is unacceptable to DB2.
+One of the following has occurred:
+ An attempt has been made to PREPARE or EXECUTE
+IMMEDIATE an SQL statement that cannot be prepared;
+refer to the proper SQL statement in DB2 SQL Reference
+ The embedded SQL statement is not an SQL statement
+supported by DB2.
+ The statement referenced an undeclared cursor.
+ An attempt was made to prepare an ALLOCATE CURSOR
+statement but the statement identifier is already associated
+with a declared cursor.
+System Action: The statement cannot be executed.
+Programmer Response: If the situation involves an SQL
+statement that cannot be prepared, the problem is in the
+source of the SQL statement, not the application program.
+Thus, no action is necessary unless the source of the SQL
+statement is the application program itself.
+If the situation involves an SQL statement that is not supported
+by DB2, remove it from the application program and precompile
+again.
+If the situation involves an invalid PREPARE of an ALLOCATE
+CURSOR statement, change the application program to use a
+statement identifier that is not associated with a declared
+cursor.
+Destination: 42612
+| -097 THE USE OF LONG VARCHAR OR LONG
+| VARGRAPHIC IS NOT ALLOWED IN THIS
+| CONTEXT
+| Explanation: The statement attempted to use the LONG
+| VARCHAR or LONG VARGRAPHIC syntax. This syntax
+| cannot be used for the following statements:
+|  CAST syntax
+|  CREATE DISTINCT TYPE
+|  CREATE FUNCTION
+|  CREATE PROCEDURE
+|  ALTER FUNCTION
+|  COMMENT ON FUNCTION
+|  GRANT EXECUTE ON FUNCTION
+|  REVOKE EXECUTE ON FUNCTION
+| Use the VARCHAR or VARGRAPHIC syntax specifying an
+| explicit length as required.
+| System Action: The statement cannot be executed.
+| Programmer Response: Correct the statement.
+| 42601
+ SQL Return Codes 31
+-101  -107
+-101 THE STATEMENT IS TOO LONG OR TOO
+COMPLEX
+Explanation: The statement cannot be executed because it
+exceeds the system limits for either length or complexity. Enabling
+parallelism will increase the complexity of the statement.
+System Action: The statement cannot be executed.
+Programmer Response: Break the statement up into shorter
+or less complex SQL statements. If parallelism is enabled, try
+disabling parallelism by using the DEGREE(1) bind option for
+static SQL or by setting the CURRENT DEGREE special register
+to '1' for dynamic SQL.
+Destination: 42601
+-102 LITERAL STRING IS TOO LONG. STRING
+BEGINS string
+Explanation: The string constant beginning with 'string' has a
+length greater than 255 characters or 124 graphic characters.
+Character strings with lengths greater than 255 and graphic
+strings with lengths greater than 124 can be specified only
+through assignment from host variables.
+For special registers, the allowable length depends on the particular
+special register. See Chapter 3 of the SQL Reference to
+determine the maximum length of a value for a special register.
+Two consecutive string delimiters are used to represent one
+string delimiter within the character string, but these count as 2
+bytes when calculating the lengths of character string constants.
+System Action: The statement cannot be executed.
+Programmer Response: The requested function is not available
+interactively. If the error occurred in the context of an SQL
+statement embedded in an application program, the desired
+result can be achieved by assigning the long string to a host
+variable, and substituting that variable for the string literal in
+the SQL statement.
+Destination: 54002
+-103 literal IS AN INVALID NUMERIC LITERAL
+Explanation: The indicated 'literal' begins with a digit, but is
+not a valid integer, decimal, or float literal.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the invalid literal.
+Destination: 42604
+-104 ILLEGAL SYMBOL "token". SOME SYMBOLS
+THAT MIGHT BE LEGAL ARE: token-list
+Explanation: A syntax error was detected where the symbol
+"token" occurs in the SQL statement. The list of symbols that
+might be legal shows some alternate symbols that could possibly
+be correct at that point, if the preceding part of the statement
+is entirely correct.
+However, the preceding part of the statement might be incorrect.
+For example, if an important keyword is omitted, DB2
+detects the error later, and not always immediately after the
+point where the keyword should appear. The list of alternate
+symbols are only suggestions. Some of those symbols might
+not even be legal for statements to be executed by DB2.
+Those symbols are possibly correct for statements sent to
+other database management systems.
+# This SQL code will also be issued if the RELEASE TO
+# SAVEPOINT statement is specified without a savepoint name.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the statement and execute
+it again.
+Destination: 42601
+-105 INVALID STRING
+Explanation: The statement contains an invalid string. It is
+neither a character string nor a graphic string.
+System Action: The statement cannot be executed.
+Programmer Response: Specify the correct format of the
+string. Check for a graphic string, paired delimiters, the character
+G or N, and an even number of bytes within the string.
+Destination: 42604
+-107 THE NAME name IS TOO LONG. MAXIMUM
+ALLOWABLE SIZE IS size
+Explanation: The name is too long. The maximum permissible
+length for names of that type is indicated by size.
+# Names for the following cannot contain more than 128
+# characters:
+#  Savepoint-name
+Names for the following cannot contain more than 64
+characters:
+ Version-id
+Names for the following cannot contain more than 18 characters
+(20 including SQL escape characters, if present):
+ SQL columns
+ SQL tables
+ SQL views
+ SQL indexes
+ SQL aliases
+ SQL synonyms
+ Collection-ids
+ Check constraints
+|  Functions
+|  Stored procedures
+|  User-defined types
+Names for the following cannot contain more than 16
+characters:
+ Location-name
+The following cannot contain more than 8 characters:
+ Table qualifiers
+ View qualifiers
+ Library member names specified in an INCLUDE statement
+ Storage group names
+ Database names
+ Table space names
+ Application plans
+ Database request modules (DBRMs)
+ Referential constraint names specified in CREATE or
+ALTER TABLE statements
+ Package-id
+|  Schema names
+|  Trigger names
+32 Messages and Codes 
+-108  -113
+Host variable names cannot contain more than 64 characters.
+Volume serial numbers cannot contain more than 6 characters.
+Labels cannot contain more than 30 characters.
+System Action: The statement cannot be executed.
+Programmer Response: Choose a shorter name for the
+object.
+Destination: 42622
+-108 THE NAME name IS QUALIFIED INCORRECTLY
+Explanation: The name name is improperly qualified.
+A target name on the RENAME statement may not have a
+qualifier.
+System Action: The statement cannot be executed.
+Programmer Response: Remove the qualifier and reissue
+the statement.
+Destination: 42601
+-109 clause CLAUSE IS NOT PERMITTED
+Explanation: The indicated clause is not permitted in the
+context in which it appears in this SQL statement for the following
+reasons:
+ A subselect cannot have an INTO clause.
+ A CREATE VIEW statement cannot have INTO, ORDER
+BY, or FOR UPDATE clauses.
+ An embedded SELECT statement cannot have ORDER BY
+or FOR UPDATE clauses
+ SELECT statements used in cursor declarations cannot
+have an INTO clause.
+|  A RAISE_ERROR function can only be used as a select
+| list item if it is cast to some data type using the CAST
+| specification.
+|  DESCRIBE INPUT statement can not have USING clause.
+|  QUERYNO cannot be specified as part of an EXPLAIN
+| statement when the EXPLAIN statement contains an
+| 'explainable-sql-statement'.
+#  The table being updated in a POSITIONED UPDATE state#
+ment cannot be assigned a correlation name.
+| If the clause is part of a CREATE INDEX, CREATE TABLE,
+| CREATE TABLESPACE or ALTER TABLESPACE statement,
+| see the appropriate section of the SQL Reference for a
+| description of the valid use of clauses for the statement.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the SQL statement.
+Destination: 42601
+-110 INVALID HEXADECIMAL LITERAL BEGINNING
+string
+Explanation: The literal beginning with the specified 'string'
+contains one or more characters that are not valid hexadecimal
+digits.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the invalid literal.
+Destination: 42606
+-111 A COLUMN FUNCTION DOES NOT INCLUDE A
+COLUMN NAME
+| Explanation: For example, the specification of a column
+| function (AVG, MAX, MIN, or SUM) was invalid because such
+| functions must include a column name in the operand. In a
+| trigger definition, a transition variable specification does not
+| qualify as a column name for this purpose.
+System Action: The statement cannot be executed.
+Programmer Response: A column name must be specified
+as an operand to the function. Refer to Chapter 4 of DB2 SQL
+Reference for information about the proper usage of column
+functions.
+Destination: 42901
+-112 THE OPERAND OF A COLUMN FUNCTION IS
+ANOTHER COLUMN FUNCTION
+Explanation: The operand of a column function can be either
+an expression or DISTINCT followed by an expression. The
+operand cannot be another column function.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the function specification.
+Refer to Chapter 4 of DB2 SQL Reference for information
+about the proper usage of column functions.
+Destination: 42607
+-113 INVALID CHARACTER FOUND IN string,
+REASON CODE nnn
+Explanation: The string contains an invalid character. It can
+be an SQL ordinary identifier name, a host variable name, or a
+DBCS comment.
+For SBCS SQL ordinary identifiers, names of buffer pools,
+databases, plans, and storage groups must contain only uppercase
+alphabetic or national characters and numerics when
+CHARSET is KATAKANA; the first character must be alphabetic
+or national.
+The following reason codes apply to SBCS identifiers:
+000 An invalid character was found in the SBCS identifier
+(including the case in which a DBCS identifier
+was used where only an SBCS identifier is
+allowed.)
+The following reason codes apply to DBCS identifiers or
+comments:
+101 An odd number of bytes exists between the shift-out
+and the shift-in character.
+102 Either a shift-in or shift-out character is missing.
+103 DBCS blanks X'4040' are not allowed.
+104 There are no characters between the shift-out and
+the shift-in characters.
+105 Shift-out cannot be the first byte of the DBCS character
+between the shift-out and the shift-in characters.
+System Action: Processing is terminated.
+User Response: Correct the name.
+Destination: 42602
+ SQL Return Codes 33
+-114  -120
+-114 THE LOCATION NAME location DOES NOT
+MATCH THE CURRENT SERVER
+Explanation: A 3-part SQL procedure name was provided for
+one of the following SQL statements:
+ASSOCIATE LOCATORS
+CALL
+DESCRIBE PROCEDURE
+The first part of the SQL procedure name, which specifies the
+location where the stored procedure resides, did not match the
+value of the SQL CURRENT SERVER special register.
+System Action: The statement cannot be executed.
+Programmer Response: Take one of these actions to
+resolve the mismatch:
+ Change the location qualifier to match the CURRENT
+SERVER special register.
+ Issue an SQL CONNECT to the location where the stored
+procedure resides before issuing the SQL statement.
+Ensure that the SQL CALL statement is issued before the
+ASSOCIATE LOCATORS or DESCRIBE PROCEDURE.
+|  Bind the package containing the 3-part SQL procedure
+| name with the BIND option DBPROTOCOL(DRDA). With
+| this option, DB2 implicitly uses the DRDA protocol for
+| remote access to the stored procedure.
+|  Correct the statements so that the exact syntax used to
+| specify the procedure name on the CALL statement be the
+| same as that on the ASSOCIATE LOCATOR and/or
+| DESCRIBE PROCEDURE. If an unqualified name is used
+| to CALL the procedure, the 1-part name must also be used
+| on the other statements. If the CALL statement is made
+| with a 3-part name, and the current server is the same as
+| the location in the 3-part name, the ASSOCIATE
+| LOCATOR or DESCRIBE procedure can omit the location.
+Destination: 42961
+-115 A PREDICATE IS INVALID BECAUSE THE
+COMPARISON OPERATOR operator IS FOLLOWED
+BY A PARENTHESIZED LIST OR BY
+ANY OR ALL WITHOUT A SUBQUERY
+Explanation: A simple comparison like '>' must not be followed
+by a list of items. ANY and ALL comparisons must be
+followed by a subselect, rather than an expression or a list of
+items.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the SQL statement. Refer
+to Chapter 6 of DB2 SQL Reference for information about the
+syntax of SQL statements.
+Destination: 42601
+# -117 THE NUMBER OF VALUES ASSIGNED IS NOT
+# THE SAME AS THE NUMBER OF SPECIFIED
+# OR IMPLIED COLUMNS
+Explanation: The number of insert values in the value list of
+the INSERT statement is not the same as the number of object
+# columns specified. Alternatively, the number of values on the
+# right side of an assignment in a SET assignment statement or
+# the SET clause of an UPDATE statement does not match the
+# number of columns on the left side.
+System Action: The statement cannot be executed. No data
+was inserted into the object table.
+Programmer Response: Correct the statement to specify
+one and only one value for each of the specified object
+columns.
+Destination: 42802
+| -118 THE OBJECT TABLE OR VIEW OF THE
+| DELETE OR UPDATE STATEMENT IS ALSO
+| IDENTIFIED IN A FROM CLAUSE
+| Explanation: The table or view specified as the object of a
+| DELETE or UPDATE statement also appears in the FROM
+| clause of a subselect within the statement.
+| The table or view that is the object of a UPDATE or DELETE
+| cannot also be used to supply the values to be inserted or to
+| qualify the rows to be updated or deleted.
+System Action: The statement cannot be executed. No data
+was updated or deleted.
+Programmer Response: The implied function is not supported
+by DB2. It may be possible to obtain the desired result
+by creating a temporary copy of the object table or view and
+addressing the subselect to that copy. Refer to Chapter 6 of
+DB2 SQL Reference for information about the syntax of SQL
+statements.
+Destination: 42902
+-119 A COLUMN IDENTIFIED IN A HAVING CLAUSE
+IS NOT INCLUDED IN THE GROUP BY
+CLAUSE
+Explanation: A column identified in a HAVING clause (possibly
+within a scalar function) does not appear in the GROUP
+BY clause. Columns specified in a HAVING clause must
+appear within column functions or also be specified in the
+GROUP BY clause.
+System Action: The statement cannot be executed.
+Programmer Response: The implied function is not supported
+by DB2. Refer to Chapter 5 of DB2 SQL Reference for
+information about the proper usage of HAVING and GROUP
+BY clauses.
+Destination: 42803
+| -120 A WHERE CLAUSE, SET CLAUSE, VALUES
+| CLAUSE, OR A SET ASSIGNMENT STATE|
+MENT INCLUDES A COLUMN FUNCTION
+| Explanation: A column function or a user-defined function
+| that is sourced on a column function is not permitted in a SET
+| clause, a VALUES clause, or a SET assignment statement. A
+| column function or a user-defined function that is sourced on a
+| column function is allowed in a WHERE clause only if the
+WHERE clause appears within a subquery of a HAVING
+clause.
+System Action: The statement cannot be executed.
+Note: The 'column-name' may or may not be returned in
+SQLCA, depending on the nature of the error occurring
+in the SQL statement.
+Programmer Response: The implied function is not supported
+by DB2. Refer to Chapter 5 of DB2 SQL Reference for
+information about restrictions on operands that can be speci|
+fied within WHERE, SET and VALUES clauses and SET
+| assignment statements.
+Destination: 42903
+34 Messages and Codes 
+-121  -128
+-121 THE COLUMN name IS IDENTIFIED MORE
+THAN ONCE IN THE INSERT OR UPDATE OR
+SET TRANSITION VARIABLE STATEMENT
+| Explanation: The same column 'name' is specified more
+| than once, either in the list of object columns of an INSERT
+| statement, in the SET clause of an UPDATE statement, or in a
+| SET transition variable statement.
+System Action: The statement cannot be executed. No data
+was inserted or updated in the object table.
+Programmer Response: Correct the syntax of the statem
+-129  -136
+-129 THE STATEMENT CONTAINS TOO MANY
+TABLE NAMES
+Explanation: A subselect (including all subqueries) can have
+# a maximum of 225 references to table names.
+System Action: The statement cannot be executed.
+Programmer Response: Break the SQL statement into two
+# or more simpler statements with less than 225 table references
+in each. The count will include the number of base table occurrences
+from each table or view on the FROM list. Refer to
+Chapter 5 of DB2 SQL Reference for the definition of a subselect.
+Destination: 54004
+-130 THE ESCAPE CLAUSE CONSISTS OF MORE
+THAN ONE CHARACTER, OR THE STRING
+PATTERN CONTAINS AN INVALID OCCURRENCE
+OF THE ESCAPE CHARACTER
+Explanation: The ESCAPE character must be a single character,
+either SBCS or DBCS as appropriate. For
+'column-name LIKE pattern', the ESCAPE character can only
+appear in the character string if it is followed by itself, %, or _
+(underscore). The Escape Clause cannot be specified if the
+column name at the left of the LIKE or NOT LIKE has the
+MIXED subtype.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the string pattern, or
+choose a different ESCAPE character and change the pattern
+accordingly, or eliminate the use of the Escape Clause on the
+LIKE or NOT LIKE predicate where the column name to the
+left has the MIXED subtype.
+Destination: 22019 if other than invalid ESCAPE pattern.
+22025 if invalid ESCAPE pattern.
+-131 STATEMENT WITH LIKE PREDICATE HAS
+INCOMPATIBLE DATA TYPES
+Explanation: If the column name at the left of LIKE or NOT
+LIKE is of type character, the expression at the right and the
+ESCAPE character must be of type character. If the column
+name is of type graphic, the expression at the right and the
+ESCAPE character must be of type graphic.
+System Action: The statement cannot be executed.
+Programmer Response: Check the data type of every
+operand.
+Destination: 42818
+| -132 AN OPERAND OF value IS NOT VALID
+| Explanation: The operation value can be the LIKE predicate,
+| the ESCAPE clause, the LOCATE scalar function, or the
+| POSSTR scalar function.
+| The operand appearing to the left of a LIKE or NOT LIKE pred|
+icate, the operand appearing in the ESCAPE clause, the
+| second parameter of LOCATE or the first operand of POSSTR
+| must be a string expression. The value appearing to the right
+| of the LIKE predicate, the first operand of LOCATE or the
+| second operand of POSSTR can be one of:
+|  a constant
+|  a special register
+|  a host variable
+|  a scalar function whose operands are any of the above
+|  an expression concatenating any of the above
+| The actual length of a pattern-expression or search-expression
+| cannot be more than 4000 bytes. The actual length of an
+| escape clause cannot exceed one character.
+| A LIKE predicate, ESCAPE clause, LOCATE scalar function or
+| POSSTR scalar function cannot be used with DATE, TIME, or
+| TIMESTAMP.
+| System Action: The statement cannot be executed.
+| Programmer Response: Check and correct the syntax of
+| LIKE, LOCATE, or POSSTR
+| Destination: 42824
+-133 A COLUMN FUNCTION IN A SUBQUERY OF A
+HAVING CLAUSE IS INVALID BECAUSE ALL
+COLUMN REFERENCES IN ITS ARGUMENT
+ARE NOT CORRELATED TO THE GROUP BY
+RESULT THAT THE HAVING CLAUSE IS
+APPLIED TO
+Explanation: If a column function has a correlated column
+reference, it must be correlated from within a HAVING clause
+to the GROUP BY result that the HAVING clause is applied to.
+All column references in the argument must satisfy this condition.
+System Action: The statement cannot be executed.
+Programmer Response: Refer to Chapter 5 of DB2 SQL
+Reference for information about restrictions on the syntax of
+the HAVING clause.
+Destination: 42906
+| -134 IMPROPER USE OF LONG STRING COLUMN
+| column-name OR AN EXPRESSION THAT
+| RESOLVES TO A LONG STRING
+| Explanation: A long string was referenced in a context in
+| which long strings are not allowed. For an exhaustive list of
+| such contexts, refer to “Varying Length Character Strings” in
+| Chapter 3 of DB2 SQL Reference.
+| System Action: The statement cannot be executed.
+| Note: The column-name might not be returned in the SQLCA,
+| depending on the nature of the error and the syntax in
+| which it occurred.
+| Programmer Response: The requested operation on a long
+| string value is not supported by DB2. Refer to Chapter 3 of
+| DB2 SQL Reference for information about restrictions on the
+| specification and manipulation of long string values.
+| Destination: 42907
+-136 SORT CANNOT BE EXECUTED BECAUSE THE
+SORT KEY LENGTH IS GREATER THAN 4000
+BYTES
+Explanation: A sort key is derived from the list of columns
+specified following a DISTINCT qualifier, or in an ORDER BY
+or GROUP BY clause. If both a DISTINCT qualifier and an
+ORDER BY or GROUP BY clause are present, the sort key is
+derived from the combination of both lists of columns.
+The internal length of the sort key cannot exceed 4000 bytes.
+In attempting to process the SQL statement, the internal length
+of the sort key derived from the DISTINCT and/or ORDER BY
+36 Messages and Codes 
+-137  -144
+or GROUP BY specifications was found to exceed that
+4000-byte maximum.
+System Action: The statement cannot be executed.
+Programmer Response: The statement must be modified
+such that the internal length of the sort key will not exceed
+4000 bytes. In general, this means that one or more column
+names must be deleted from the ORDER BY or GROUP BY
+clause, or the list following the DISTINCT qualifier.
+Destination: 54005
+| -137 THE LENGTH RESULTING FROM operation IS
+| GREATER THAN maximum-length
+| Explanation: The length of the result of concatenation or a
+| function exceeds the defined maximum. The operation that
+| resulted in the error is operation.
+|  For concatenation, the length cannot exceed 32,764 (if
+| character operands) or 16,382 (if graphic operands).
+|  For other functions, see DB2 SQL Reference for the
+| maximum result length.
+| System Action: The statement cannot be executed.
+| Programmer Response: Ensure that the length of the result
+| does not exceed the defined maximum.
+| Destination: 54006
+-138 THE SECOND OR THIRD ARGUMENT OF THE
+SUBSTR FUNCTION IS OUT OF RANGE
+Explanation: One of the following conditions exists:
+ The second argument of the SUBSTR function is less than
+1 or greater than M.
+ The third argument of the SUBSTR function is an integer
+constant 0 or an expression whose value is less than 0 or
+greater than M−N+1.
+M is the length of the first argument, if it is of fixed-length, or M
+is the maximum length of the first argument, if it is of varyinglength.
+N is the value of the second argument.
+System Action: The statement cannot be executed.
+Programmer Response: Ensure that the second and third
+arguments of the SUBSTR function have legal values
+according the above rules.
+Destination: 22011
+| -142 THE SQL STATEMENT IS NOT SUPPORTED
+| Explanation: An SQL statement was detected that is not sup|
+ported by the database. The statement might be valid for other
+| IBM relational database products or it might be valid in another
+| context. For example, statements such as VALUES and
+| SIGNAL SQLSTATE can appear only inside a trigger.
+| System Action: The statement cannot be executed.
+| Programmer Response: Change the syntax of the SQL
+| statement or remove the statement from the program.
+| Destination: 42612
+-144 INVALID SECTION NUMBER number
+Explanation: One of the following:
+1. The user attempted to execute an invalid section.
+2. This release of DB2 does not support the SQL statement.
+3. The section number in the call parameter list is one of
+these:
+ Negative
+ An invalid duplicate
+ Greater than the maximum section number of the
+DBRM or package.
+System Action: The statement is not executed.
+Programmer Response: For case 1: If you are executing a
+package that was bound with SQLERROR(CONTINUE), determine
+whether the statement in question was bound as a valid
+section. You can use the following statements to query the
+DB2 catalog:
+ SELECT SQLERROR
+FROM SYSIBM.SYSPACKAGE
+WHERE COLLID = collection-id AND
+NAME = package-id AND
+VERSION = version-name;
+If that query returns 'C', the package was bound with
+SQLERROR(CONTINUE).
+SELECT STMTNO, TEXT
+FROM SYSIBM.SYSPACKSTMT
+WHERE COLLID = collection-id AND
+NAME = package-id AND
+VERSION = version-name AND
+SECTNO = number AND
+BINDERROR = 'Y';
+If that query returns any rows, the section is invalid. Refer to
+the error messages issued during the bind to determine the
+cause. Correct any errors and bind the package again, using
+the REPLACE option.
+For case 2: If the DB2 system has fallen back to a previous
+release, determine whether there are any SQL statements with
+a section number of zero that are not supported by that
+release. You can use the following statements to query the
+DB2 catalog.
+When executing from a DBRM, use:
+ SELECT :
+FROM SYSIBM.SYSSTMT
+WHERE SECTNO = 
+ORDER BY NAME, PLNAME, STMTNO, SEQNO;
+When executing from a package, use:
+ SELECT :
+FROM SYSIBM.SYSPACKSTMT
+WHERE SECTNO = 
+ORDER BY COLLID, NAME, VERSION, STMTNO, SEQNO;
+For case 3: Examine the application to determine whether the
+call parameter list was changed in some way. In general, you
+should not attempt to change the output of the precompiler.
+Destination: 58003
+ SQL Return Codes 37
+-147  -151
+| -147 ALTER FUNCTION function-name FAILED
+| BECAUSE SOURCE FUNCTIONS CANNOT BE
+| ALTERED
+| Explanation: The function cannot be altered because it is a
+| source function. Only external scalar functions, or external
+| table functions can be altered.
+| To change an existing source function, you must DROP the
+| function and recreate it.
+| System Action: The statement cannot be executed.
+| Programmer Response: Change the statement to refer to a
+| function that can be altered, or recreate the function by drop|
+ping it and then creating a new version of it.
+| Destination: 42809
+| -148 THE SOURCE TABLE source-name CANNOT
+| BE RENAMED OR ALTERED
+Explanation: Possible cases:
+1 The RENAME statement cannot be used to rename a
+view, an active RLST table, or a table for which a
+synonym is defined.
+| 2 The ALTER statement cannot be used to alter the length
+| of the column because the column is referenced in a ref|
+erential integrity relation, a user exit (field procedure, edit
+| procedure, valid procedure, stored procedure or user
+| defined function), a global temporary table, or a table
+| defined with data capture changes. If the table name
+| specified in the alter is a view or if there exists a row in
+| SYSVIEWDEP that has this source-name as a base table
+| name, then this ALTER statement will fail.
+3 The ALTER statement failed because the maximum
+number of ALTERs was exceeded for an index that has a
+key containing columns affected by the ALTER.
+System Action: The statement cannot be executed.
+Programmer Response: For case:
+1 Drop all views, inactivate the RLST table, or drop the
+synonym.
+2 Avoid referential integrity relations, user exits, or global
+temporary tables.
+3 Run REORG INDEX, REORG TABLESPACE, or
+REBUILD INDEX. If the index is partitioned, then run the
+utility on all the partitions. Reissue the statement.
+Destination: 42809
+-150 THE OBJECT OF THE INSERT, DELETE, OR
+UPDATE STATEMENT IS A VIEW OR TRANSITION
+TABLE FOR WHICH THE REQUESTED
+OPERATION IS NOT PERMITTED
+Explanation: One of the following occurred:
+|  A transition table was named in an INSERT, UPDATE, or
+| DELETE statement in a triggered action. Transition tables
+| are read-only.
+
+The view named in the INSERT, UPDATE, or DELETE
+statement is defined in such a way that the requested
+insert, update, or delete operation cannot be performed
+upon it.
+Inserts into a view are prohibited if:
+– The view definition contains a join, a GROUP BY, or a
+HAVING clause.
+– The SELECT clause in the view definition contains the
+DISTINCT qualifier, an arithmetic expression, a string
+expression, a built-in function, or a constant.
+– Two or more columns of the view are derived from the
+same column.
+– A base table of the view contains a column that does
+not have a default value and is not included in the
+view.
+Updates to a view are prohibited if:
+– The view definition contains a join, a GROUP BY, or a
+HAVING clause.
+– The SELECT clause in the view definition contains the
+DISTINCT qualifier or a function.
+Also, a given column in a view cannot be updated (that is,
+the values in that column cannot be updated) if the column
+is derived from an arithmetic expression, a constant, a
+column that is part of the key of a partitioned index, or a
+column of a catalog table that cannot be updated.
+Deletes against a view are prohibited if:
+– The view definition contains a join, a GROUP BY, or a
+HAVING clause.
+– The SELECT clause in the view definition contains the
+DISTINCT qualifier or a built-in function.
+System Action: The statement cannot be executed. No data
+was inserted, updated, or deleted.
+Programmer Response: The requested function cannot be
+performed on the view. Refer to Chapter 6 of DB2 SQL Reference
+for further information regarding inserting, deleting, and
+updating views.
+| If the error occurred on a CREATE TRIGGER statement,
+| remove the INSERT, UPDATE, or DELETE reference to the
+| transition table.
+Destination: 42807
+| -151 THE UPDATE STATEMENT IS INVALID
+| BECAUSE THE CATALOG DESCRIPTION OF
+| COLUMN column-name INDICATES THAT IT
+| CANNOT BE UPDATED
+| Explanation: The specified column cannot be updated for
+| one of the following reasons:
+|  The values for columns occurring in the partitioning key of
+| a partitioned table cannot be updated.
+|  The object table is a view and the specified column is
+| defined (in the definition of the view) in such a way that it
+| cannot be updated.
+|  The object table is a catalog table with no columns that
+| can be updated.
+|  The object column is a ROWID column.
+#  The object column is defined with the AS IDENTITY and
+# GENERATED ALWAYS attributes.
+#  The specified column of catalog tables cannot be updated
+# because the column itself is not updatable.
+| Individual columns in a view cannot be updated for one of the
+| following reasons:
+38 Messages and Codes 
+-152  -158
+|  The column is derived from an SQL function, an arithmetic
+| expression, or a constant.
+|  The column is defined for a column of an underlying view
+| that cannot be updated.
+|  The column is defined for a read-only view.
+#  The column is defined for a column that is in the parti#
+tioning key of a partitioned table.
+| System Action: The statement cannot be executed. No data
+| was updated in the object table or view.
+| Programmer Response: The requested function is not sup|
+ported by DB2. Refer to the description of the UPDATE state|
+ment in Chapter 6 of DB2 SQL Reference for information about
+# restrictions on the ability to update ROWID columns, identity
+# columns, and columns in partitioned tables and views.
+| Destination: 42808
+-152 THE DROP clause CLAUSE IN THE ALTER
+STATEMENT IS INVALID BECAUSE constraintname
+IS A constraint-type
+Explanation: Either the DROP FOREIGN KEY clause of an
+ALTER TABLE statement tried to drop a check constraint, or
+the DROP CHECK clause of an ALTER TABLE statement tried
+to drop a referential constraint.
+The clause is either CHECK or FOREIGN KEY. The constrainttype
+is either REFERENTIAL CONSTRAINT or CHECK CONSTRAINT.
+System Action: The ALTER TABLE DROP statement cannot
+be executed. No object was dropped.
+Programmer Response: Drop the existing object with the
+correct DROP clause of the ALTER TABLE statement.
+Destination: 42809
+# -153 THE STATEMENT IS INVALID BECAUSE THE
+# VIEW OR TABLE DEFINITION DOES NOT
+# INCLUDE A UNIQUE NAME FOR EACH
+# COLUMN
+Explanation: You must specify a list of column names if the
+# result table of the subselect that is specified in the CREATE
+# VIEW or DECLARE GLOBAL TEMPORARY TABLE statement
+has duplicate column names or an unnamed column (a column
+from a constant, function, or expression).
+System Action: The statement cannot be executed. The
+# specified view was not created, or the declared temporary
+# table was not declared.
+Programmer Response: Correct the statement by providing
+a list of names for the columns of the view. Refer to Chapter 6
+of DB2 SQL Reference for information about the syntax of the
+# CREATE VIEW statement or the DECLARE GLOBAL TEMPO#
+RARY TABLE statement.
+Destination: 42908
+# -154 THE STATEMENT FAILED BECAUSE VIEW OR
+# TABLE DEFINITION IS NOT VALID
+# Explanation: The view defined in the CREATE VIEW state#
+ment or the table declared in the DECLARE GLOBAL TEMPO#
+RARY TABLE statement is not valid because the view or table
+# definition contains one of the following:
+#  UNION or UNION ALL
+#  a reference to a remote object
+#  multiple columns in the select-list of the view definition are
+# either the ROWID type, or a distinct type for which the
+# source type is a ROWID. Only a single ROWID column (or
+# distinct type for which the source type is a ROWID) can be
+# referenced in the select-list of the definition of a view.
+# System Action: The statement cannot be executed. The
+# specified object is not defined.
+# Programmer Response: Refer to Chapter 6 of DB2 SQL
+# Reference for information about restrictions on the definitions
+# for views or declared temporary tables.
+# Destination: 42909
+-156 THE STATEMENT DOES NOT IDENTIFY A
+TABLE
+| Explanation: The statements ALTER TABLE, DROP TABLE,
+| LOCK TABLE, CREATE INDEX, and CREATE TRIGGER
+| apply only to tables. Indexes and triggers can be defined only
+| on tables.
+System Action: The statement cannot be executed. The
+specified view or remote object was not altered, dropped, or
+locked, or the index or trigger was not created.
+Programmer Response: Verify that the proper name was
+specified in the statement.
+Destination: 42809
+-157 ONLY A TABLE NAME CAN BE SPECIFIED IN
+A FOREIGN KEY CLAUSE. object-name IS
+NOT THE NAME OF A TABLE.
+Explanation: The indicated object was identified in a
+FOREIGN KEY clause of a CREATE or ALTER TABLE statement.
+A FOREIGN KEY clause must identify a table.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the statement to specify a
+table name in the foreign key clause.
+Destination: 42810
+| -158 THE NUMBER OF COLUMNS SPECIFIED FOR
+| THE VIEW IS NOT THE SAME AS THE
+| NUMBER OF COLUMNS SPECIFIED BY THE
+| SELECT CLAUSE, OR THE NUMBER OF
+| COLUMNS SPECIFIED IN THE CORRELATION
+| CLAUSE IN A FROM CLAUSE IS NOT THE
+| SAME AS THE NUMBER OF COLUMNS IN THE
+| CORRESPONDING TABLE, VIEW, TABLE
+| EXPRESSION, OR TABLE FUNCTION
+| Explanation: There are two cases:
+|  The number of column names specified for a view in a
+| CREATE VIEW statement must equal the number of ele|
+ments (column names, SQL functions, expressions, etc.)
+| specified in the following AS SELECT clause.
+ SQL Return Codes 39
+-159  -173
+|  The number of column names specified in a correlation
+| clause must equal the number of columns in the corre|
+sponding table, view, table expression or table function.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the syntax of the statement
+to specify a column name for each column in the corresponding
+object (table, view, etc.). Refer to Chapter 6 of DB2
+SQL Reference for information about the syntax of the statement.
+Destination: 42811
+| -159 DROP OR COMMENT ON object IDENTIFIES
+| A(N) object-type1 RATHER THAN A(N)
+| object-type2
+Explanation: The object specified in the DROP VIEW statement,
+DROP ALIAS statement, or COMMENT ON ALIAS statement
+identifies a table instead of a view or an alias.
+The DROP VIEW statement can have only a view as its object.
+The DROP ALIAS or COMMENT ON ALIAS statement can
+have only an alias as its object. You must use the DROP
+TABLE statement to drop a table that is neither a view nor an
+alias. You must use the COMMENT ON TABLE statement to
+comment on a table or view.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the DROP VIEW, DROP
+ALIAS, or COMMENT ON ALIAS statement so that the view
+name or the alias name is specified correctly (with the proper
+qualifier). If you intended to drop or comment on the specified
+table, use the DROP TABLE or COMMENT ON TABLE statement.
+Destination: 42809
+-160 THE WITH CHECK OPTION CANNOT BE USED
+FOR THE SPECIFIED VIEW
+Explanation: The WITH CHECK OPTION does not apply to a
+view definition under either of the following circumstances:
+ The view is read-only (for example, the view definition
+includes DISTINCT GROUP BY, or JOIN).
+ The view definition includes a subquery.
+System Action: The statement cannot be executed. The
+specified view was not created.
+Programmer Response: Refer to Chapter 6 of DB2 SQL
+Reference for rules regarding use of the WITH CHECK
+OPTION in view definitions.
+Destination: 42813
+-161 THE INSERT OR UPDATE IS NOT ALLOWED
+BECAUSE A RESULTING ROW DOES NOT
+SATISFY THE VIEW DEFINITION
+Explanation: The WITH CHECK OPTION applies to the view
+that is the object of the INSERT or UPDATE statement. Consequently,
+all attempts to insert or update rows in that view are
+checked to ensure that the results will conform to the view definition.
+System Action: The statement cannot be executed. No
+inserts or updates were performed, and the contents of the
+object view (and underlying base table) remain unchanged.
+Programmer Response: Examine the view definition to
+determine why the requested INSERT or UPDATE was
+rejected. Note that this may be a data-dependent condition.
+Destination: 44000
+-164 auth-id1 DOES NOT HAVE THE PRIVILEGE TO
+CREATE A VIEW WITH QUALIFICATION
+authorization ID
+Explanation: The authorization ID 'auth-id' does not have
+the authority necessary to create views with qualifiers other
+than its own authorization ID. Specifically, the attempt to
+create a view with qualifier 'authorization ID' is rejected.
+System Action: The statement cannot be executed. The
+specified view was not created.
+Programmer Response: Do not attempt to create views with
+other than your own ID as a qualifier. Only an authorization ID
+that holds 'SYSADM' authority can create views for other
+authorization IDs.
+Destination: 42502
+-170 THE NUMBER OF ARGUMENTS SPECIFIED
+FOR function-name IS INVALID
+Explanation: An SQL statement includes the scalar function
+'function-name' with either too many or too few arguments.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the statement. Refer to
+Chapter 4 of DB2 SQL Reference for information about the
+number of arguments required by the scalar function
+'function-name'.
+Destination: 42605
+-171 THE DATA TYPE, LENGTH, OR VALUE OF
+ARGUMENT nn OF function-name IS INVALID
+Explanation: Either the data type, the length or the value of
+argument nn of scalar function function-name is incorrect.
+# One reason for this error is that a character argument was
+# specified for a built-in function that expects a graphic argu#
+ment, or a graphic argument was specified for a built-in func#
+tion that expects a character argument.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the statement. Refer to
+Chapter 4 of DB2 SQL Reference for rules for each argument
+of the scalar function function-name.
+Destination: 42815
+-173 UR IS SPECIFIED ON THE WITH CLAUSE BUT
+THE CURSOR IS NOT READ-ONLY
+Explanation: The cursor is not a read-only cursor. WITH UR
+can be specified only if DB2 can determine that the cursor is
+read-only.
+System Action: Statement execution fails.
+Programmer Response: If the cursor is intended to be readonly
+but is ambiguous, add the FOR FETCH ONLY clause. If
+the cursor is updateable, change the isolation level specified
+on the WITH clause.
+Destination: 42801
+40 Messages and Codes 
+-180  -185
+-180 THE DATE, TIME, OR TIMESTAMP VALUE
+value IS INVALID
+Explanation: The length or string representation of a DATE,
+TIME, or TIMESTAMP value does not conform to any valid
+format.
+The value can contain one of the following:
+ For a host variable, the position number of the input host
+variable. If the position number cannot be determined, a
+blank is displayed.
+ For a character string constant, the character string constant.
+The maximum length that is displayed is the length
+of SQLERRM.
+ For a character column, the column name. If the column is
+a VIEW column and it has a corresponding base column,
+the VIEW column name is displayed. If the column is a
+VIEW column but it does not have a corresponding base
+column, a string of '*N' is displayed.
+Otherwise, value is a string of '*N'.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the program to ensure the
+specified value conforms to the syntax of DATE, TIME, and
+TIMESTAMP. Refer to Chapter 3 of DB2 SQL Reference for a
+list of valid DATE and TIME formats.
+Destination: 22007
+-181 THE STRING REPRESENTATION OF A
+DATETIME VALUE IS NOT A VALID DATETIME
+VALUE
+Explanation: The string representation of a datetime is not in
+the acceptable range or is not in the correct format. The proper
+ranges for datetime values are as follows:
+System Action: The statement cannot be executed.
+Programmer Response: Check whether the value is within
+the valid range and is in the proper format. Refer to Chapter 3
+of DB2 SQL Reference for information on string data formats.
+Destination: 22007
+-182 AN ARITHMETIC EXPRESSION WITH A
+DATETIME VALUE IS INVALID
+Explanation: The specified arithmetic expression contains an
+improperly used datetime value or labeled duration.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the indicated arithmetic
+expression.
+Destination: 42816
+-183 AN ARITHMETIC OPERATION ON A DATE OR
+TIMESTAMP HAS A RESULT THAT IS NOT
+WITHIN THE VALID RANGE OF DATES
+Explanation: The result of an arithmetic operation is a date
+or timestamp that is not within the valid range of dates which
+are between 0001-01-01 and 9999-12-31.
+System Action: The statement cannot be executed.
+Programmer Response: Examine the SQL statement to see
+if the cause of the problem can be determined. The problem
+may be data-dependent, in which case it will be necessary to
+examine the data that was processed at the time the error
+occurred.
+Destination: 22008
+-184 AN ARITHMETIC EXPRESSION WITH A
+DATETIME VALUE CONTAINS A PARAMETER
+MARKER
+Explanation: The specified arithmetic expression contains a
+parameter marker improperly used with a datetime value.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the indicated arithmetic
+expression.
+Destination: 42610
+-185 THE LOCAL FORMAT OPTION HAS BEEN
+USED WITH A DATE OR TIME AND NO LOCAL
+EXIT HAS BEEN INSTALLED
+Explanation: The local format option has been used with a
+datetime value and no datetime exit has been installed. This
+may occur if the LOCAL DATE LENGTH or LOCAL TIME
+LENGTH on the Installation Application Programming Defaults
+Panel indicated that an exit for datetime was supplied, but in
+fact the exit supplied by DB2 was not replaced. This may also
+occur if the datetime exit was replaced and the corresponding
+LOCAL DATE LENGTH or LOCAL TIME LENGTH on the
+Installation Application Programming Defaults Panel was not
+set to a nonzero value.
+System Action: The statement cannot be executed.
+Programmer Response: Contact the system programmer
+about installation of the date or time exit.
+Destination: 57008
+Table 2.
+Datetime Numeric Range
+Years 0001 to 9999
+Months 1 to 12
+Days April, June, September,
+November
+(months 4, 6, 9, 11)
+1 to 30
+February (month 2) 1 to 28 (Leap year 1
+to 29)
+January, March, May,
+July, August, October,
+December (months 1,
+3, 5, 7, 8, 10, 12)
+1 to 31
+Hours 0 to 24 (If hour is 24,
+other parts of time
+values are zeroes. If
+hour is USA,
+maximum hour is
+12.)
+Minutes 0 to 59
+Seconds 0 to 59
+Microseconds 0 to 999999
+ SQL Return Codes 41
+-186  -191
+-186 THE LOCAL DATE LENGTH OR LOCAL TIME
+LENGTH HAS BEEN INCREASED AND EXECUTING
+PROGRAM RELIES ON THE OLD
+LENGTH
+Explanation: The local format option has been used with a
+datetime value and DB2 has discovered that the datetime exit
+routine has been changed to produce a longer local format.
+System Action: The statement cannot be executed.
+Programmer Response: If the statement receiving this error
+is embedded in the application program, then a REBIND
+command must be issued for the application plan. If the statement
+was dynamic SQL, then the statement can be reentered.
+Destination: 22505
+-187 A REFERENCE TO A CURRENT DATE/TIME
+SPECIAL REGISTER IS INVALID BECAUSE
+THE MVS TOD CLOCK IS BAD OR THE MVS
+PARMTZ IS OUT OF RANGE
+Explanation: DB2 has encountered an invalid time-of-day
+(TOD) clock. The user referenced one of the special registers:
+CURRENT DATE, CURRENT TIME, CURRENT TIMESTAMP,
+or CURRENT TIMEZONE. If the user referenced CURRENT
+TIMEZONE, the MVS parameter PARMTZ was out of range.
+System Action: The statement cannot be executed.
+Programmer Response: For CURRENT TIMEZONE, check
+that the MVS parameter PARMTZ is between −24 and +24
+hours. For the other CURRENT special registers, check that
+the MVS TOD clock has been set correctly.
+Destination: 22506
+-188 THE STRING REPRESENTATION OF A NAME
+IS INVALID
+Explanation: The host variable referenced in the DESCRIBE
+statement does not contain a valid string representation of a
+name. One of the following error conditions has occurred.
+ The first byte of the variable is a period or a blank.
+ The number of identifiers is greater than 3.
+ An identifier is too long.
+ A period not contained in a delimited identifier is followed
+by a period or a blank.
+ A delimited identifier is followed by a character other than
+a period or a blank.
+ A delimited identifier is not terminated by a quotation mark.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the value of the host variable
+so that it is a valid string representation of a name.
+Destination: 22503
+-189 CCSID ccsid IS UNKNOWN OR INVALID FOR
+THE DATA TYPE OR SUBTYPE
+Explanation: To determine the subtype of an input host variable
+or result column, the SYSSTRINGS catalog table was
+accessed with the specified CCSID and:
+ The CCSID is not a value of either INCCSID or
+OUTCCSID, or
+ The TRANSTYPE column classifies the CCSID as
+GRAPHIC rather than CHARACTER, or
+|  A graphic CCSID has not been specified on your system.
+This error can occur when SYSSTRINGS is accessed with a
+pair of CCSIDs to determine if a translation is defined for the
+pair. In this case, the error is the inconsistency between the
+data type of a string and the TRANSTYPE classification of its
+CCSID (one is GRAPHIC and the other is CHARACTER).
+This error can also occur when a CCSID specified in DECP
+does not exist as a value in the INCCSID or OUTCCSID
+columns of SYSSTRINGS.
+| Another reason this error can occur is that you may be using
+| one of the graphic built-in functions but a graphic CCSID was
+| not specified during system installation.
+System Action: The statement cannot be bound or executed.
+Programmer Response: Ensure that the CCSSID is valid
+and consistent with the data type of the string. If a valid CCSID
+is not listed in a built-in row of SYSSTRINGS, it can be defined
+by inserting a user-provided row. If a valid CCSID is misclassified
+in a user-provided row, that row can be updated to correct
+the mistake. Refer to the appendices of DB2 Installation Guide
+for more information on CCSIDs and to DB2 SQL Reference
+for more information on the SYSSTRINGS catalog table.
+| If a graphic CCSID had not been specified at system installa|
+tion, update your DECP to include a graphic CCSID and
+| recycle your DB2.
+Destination: 22522
+| -190 ATTRIBUTES OF COLUMN column-name IN
+| TABLE table-name ARE NOT COMPATIBLE
+| WITH THE EXISTING COLUMN
+| Explanation: The attributes specified for the column of the
+| specified table in an ALTER statement are not compatible with
+| the attributes of the existing column. Either the data type or
+| length is not valid:
+|  The new altered length for the column is of different length
+| than the current length of the column.
+|  The existing column is not a VARCHAR data type.
+| System Action: The ALTER statement cannot be executed.
+| Programmer Response: Specify attributes that are compat|
+ible with the existing column.
+| Destination: 42837
+-191 A STRING CANNOT BE USED BECAUSE IT IS
+INVALID MIXED DATA
+Explanation: The operation required the translation of a
+mixed data character string to a different coded character set.
+The string could not be translated because it does not conform
+to the rules for well-formed mixed data. For example, the string
+contains EBCDIC shift codes that are not properly paired.
+System Action: The statement cannot be executed.
+42 Messages and Codes 
+-197  -205
+Programmer Response: If the string contains the intended
+information, the description of the column or host variable
+should be changed from MIXED DATA to BIT or SBCS DATA.
+If the description of the column or host variable is correct, the
+string is the problem and it must be changed to conform to the
+rules for well-formed mixed data. For more information about
+well-formed MIXED DATA refer to Chapter 3 of DB2 SQL Reference.
+Destination: 22504
+-197 QUALIFIED COLUMN NAMES IN ORDER BY
+CLAUSE NOT PERMITTED WHEN UNION OR
+UNION ALL SPECIFIED
+Explanation: A SELECT statement that specifies both the
+union of two or more tables and the ORDER BY clause cannot
+use qualified column names in the ORDER BY clause.
+Programmer Response: Change the statement so that qualified
+names are not necessary in the ORDER BY clause.
+System Action: The statement is not executed.
+Destination: 42877
+-198 THE OPERAND OF THE PREPARE OR
+EXECUTE IMMEDIATE STATEMENT IS BLANK
+OR EMPTY
+Explanation: The operand (host variable or literal string) that
+was the object of the PREPARE or EXECUTE IMMEDIATE
+statement either contained all blanks or was an empty string. A
+DBRM built in Version 2 Release 3 cannot be used on a
+Version 2 Release 2 system if the distributive functions were
+used. If this error appears on Version 2 Release 2 and the
+DBRM was built on Version 2 Release 3,the program needs to
+be precompiled again to correct the problem.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the logic of the application
+program to ensure that a valid SQL statement is provided in
+the operand of the PREPARE or EXECUTE IMMEDIATE statement
+before that statement is executed.
+Destination: 42617
+-199 ILLEGAL USE OF KEYWORD keyword. TOKEN
+token-list WAS EXPECTED
+Explanation: A syntax error was detected in the statement at
+the point where the keyword 'keyword' appears.
+As an aid to the programmer, a partial list of valid tokens is
+provided in SQLERRM as 'token-list'. Only those tokens that
+will fit are listed. Some tokens in the list might not be valid in
+statements to be executed by DB2; those tokens are valid for
+sending to other database management systems.
+System Action: The statement cannot be executed.
+Programmer Response: Examine the statement in the area
+of the indicated keyword. A colon or SQL delimiter might be
+missing.
+Destination: 42601
+-203 A REFERENCE TO COLUMN column-name IS
+AMBIGUOUS
+Explanation: An unqualified column name is ambiguous if
+more than one table or view identified in the FROM clause has
+a column with that name, or if more than one column of a
+nested table expression has that name.
+A qualified column name is ambiguous only if the qualifier is
+the correlation name for a nested table expression and the
+column name is not unique.
+| A reference to a column of the triggering table in a CREATE
+| TRIGGER statement is ambiguous if it does not use the corre|
+lation name to indicate if it refers to the old or new transition
+| variable.
+System Action: The statement cannot be executed.
+Programmer Response: If the problem is caused by a nonunique
+column name in a nested table expression, change the
+nested table expression so that the column name is unique. If
+the problem is caused by the use of an unqualified name,
+qualify it with a table, view, or correlation name.
+Destination: 42702
+-204 name IS AN UNDEFINED NAME
+| Explanation: A routine was invoked. The routine invocation
+| was not accepted because of DB2 reason code rc.
+| name The name of the routine that was invoked.
+| rc The DB2 reason code describing the cause of the
+| failure. Possible values are: 00E79000, 00E79001,
+| 00E79002, 00E79003, 00E79004, 00E79005,
+| 00E79006, 00E79007, 00E7900B, 00E7900C.
+System Action: The statement cannot be executed.
+Programmer Response: Verify that the object name was
+correctly specified in the SQL statement, including any required
+qualifiers. If it is correct, ensure that the object exists in the
+system before resubmitting the statement.
+For missing a data type or function in the SOURCE clause, it
+may be that the object does not exist, OR it may be that the
+object does exist in some schema, but the schema is not
+present in your current path.
+Destination: 42704
+-205 column-name IS NOT A COLUMN OF TABLE
+table-name
+Explanation: No column with the specified 'column-name'
+occurs in the table or view 'table-name'.
+System Action: The statement cannot be executed.
+Programmer Response: Verify that the column and table
+names are specified correctly (including any required qualifiers)
+in the SQL statement.
+Destination: 42703
+ SQL Return Codes 43
+-206  -220
+-206 column-name IS NOT A COLUMN OF AN
+INSERTED TABLE, UPDATED TABLE, OR ANY
+TABLE IDENTIFIED IN A FROM CLAUSE, OR
+IS NOT A COLUMN OF THE TRIGGERING
+TABLE OF A TRIGGER
+Explanation: This return code is used to report one of the
+following errors:
+ In the case of an INSERT or UPDATE statement, the
+specified column is not a column of the table or view that
+was specified as the object of the insert or update.
+ In the case of an INSERT with VALUES clause, there is a
+column referenced and columns are not allowed in the
+VALUES clause.
+ In the case of a SELECT or DELETE statement, the specified
+column is not a column of any of the tables or views
+identified in a FROM clause in the statement.
+#  There is a correlated reference in the GROUP BY clause
+# in the select list of a subselect, or a correlated reference is
+# not used in a search condition.
+ There is an unresolved qualified reference in HAVING.
+|  For a CREATE TRIGGER statement:
+| – A reference is made to a column using an OLD or
+| NEW correlation name. The column name is not
+| defined in the triggering table.
+| – The left side of an assignment in the SET transition|
+variable statement in the triggered action specifies an
+| old transition variable where only a new transition vari|
+able is supported or trigger was not created.
+System Action: The statement cannot be executed. No data
+was retrieved, inserted, or updated or the trigger was not
+created.
+Programmer Response: Verify that the column and table
+names are specified correctly in the SQL statement. In the
+case of a SELECT statement, check to be sure that all of the
+required tables were named in the FROM clause.
+| In the case of a CREATE TRIGGER statement, ensure that
+| only new transition variables are specified on the left side of
+| assignments in the SET transition-variable statement and that
+| any reference to columns of the triggering table are qualified
+| with a transition variable correlation name.
+Destination: 42703
+-208 THE ORDER BY CLAUSE IS INVALID
+BECAUSE COLUMN name IS NOT PART OF
+THE RESULT TABLE
+| Explanation: The statement is invalid because a column
+| ('name') specified in the ORDER BY list does not appear in
+| the result table (that is, it is not specified in the SELECT-list).
+# Only columns in the result table can be used to order that
+# result when the fullselect of the select-statement is not a sub#
+select.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the syntax of the statement,
+either by adding the specified column to the result table, or
+deleting it from the ORDER BY clause. Refer to Chapter 5 of
+DB2 SQL Reference for information about restrictions on the
+use of the ORDER BY clause to order the result of an SQL
+SELECT.
+Destination: 42707
+| -212 name IS SPECIFIED MORE THAN ONCE IN
+| THE REFERENCING CLAUSE OF A TRIGGER
+| DEFINITION
+| Explanation: The REFERENCING clause of a CREATE
+| TRIGGER statement specified the same name for more than
+| one of the OLD or NEW correlation names or the OLD_TABLE
+| or NEW_TABLE identifiers. name is the name that was speci|
+fied multiple times.
+| System Action: The statement cannot be executed. The
+| trigger was not created.
+| Programmer Response: Change the statement to specify
+| unique names for all transition variables and tables in the REF|
+ERENCING clause and resubmit the CREATE TRIGGER
+| request.
+| Destination: 42712
+-214 An expression starting with expression-start in
+the clause-type clause is not valid. Reason
+code = reason-code.
+Explanation: The expression identified by the first part of the
+expression expression-start in the clause-type clause is not
+valid for the reason specified by the reason-code as follows:
+ 2 DISTINCT is specified in the select clause and the
+expression cannot be matched exactly with an expression
+in the select list. This reason code occurs only when
+clause-type is ORDER BY.
+System Action: The statement cannot be executed.
+Programmer Response: Modify the select-statement based
+on the reason specified by the reason-code as follows:
+ 2 Remove DISTINCT from the select clause
+Destination: 42822
+-219 THE REQUIRED EXPLANATION TABLE tablename
+DOES NOT EXIST
+Explanation: The EXPLAIN statement assumes the existence
+of the explanation table and it is not defined in the DB2 subsystem
+as a base table. Refer to Chapter 6 of DB2 SQL Reference
+for more information.
+System Action: The statement cannot be executed.
+Programmer Response: Determine whether the required
+explanation table does exist. If not, create the required table.
+Destination: 42704
+-220 THE COLUMN column-name IN EXPLANATION
+TABLE table-name IS NOT DEFINED PROPERLY
+Explanation: An error occurred during the insertion of a row
+into the explanation table. The table is improperly defined for
+the following reasons:
+ A column is missing.
+ Columns are defined in the wrong order.
+ The table contains an extra column.
+ A column description is invalid because of its name, data
+type, length, or null attributes.
+System Action: The statement cannot be executed. The
+explanation information is not generated.
+44 Messages and Codes 
+-221  -251
+Programmer Response: Correct the definition of the required
+explanation table. Refer to Chapter 6 of DB2 SQL Reference
+for information on defining an explanation table.
+Destination: 55002
+-221 “SET OF OPTIONAL COLUMNS” IN EXPLANATION
+TABLE table-name IS INCOMPLETE.
+OPTIONAL COLUMN column-name IS MISSING
+Explanation: The EXPLAIN statement assumes the required
+explanation table is defined properly. The optional column indicated
+is not defined in the indicated explanation table.
+PLAN_TABLEs must have one of several specific formats.
+The format chosen must be complete, and each column in the
+PLAN_TABLE definition must be correct for the chosen format.
+The allowed formats for the PLAN_TABLE are described in
+Chapter 6 of DB2 SQL Reference.
+System Action: The explanation information is not generated.
+Programmer Response: Correct the definition of the required
+explanation table to include all of the optional columns in the
+chosen format, just the Version 2 Release 2 optional columns,
+or no optional columns. Refer to Chapter 6 of DB2 SQL Reference
+for information on defining an explanation table.
+Destination: 55002
+| -229 THE LOCALE locale SPECIFIED IN A SET
+| LOCALE OR OTHER STATEMENT THAT IS
+| LOCALE SENSITIVE WAS NOT FOUND
+| Explanation: The statement attempted to reference a Locale
+| that is not known or not available to DB2. locale is the locale
+| that was either specified on the SET CURRENT LOCALE
+| statement or the locale that was in effect at the time the Locale
+| access was attempted.
+| System Action: The statement cannot be executed.
+| Programmer Response: If the statement was a SET
+| LOCALE statement, re-specify a locale that is correct (known
+| and available to DB2). Refer to Chapter 3 of SQL Reference
+| for more information on Locales. If the statement was some|
+thing other than SET LOCALE, then the statement contained a
+| locale sensitive interface (the UPPER function is an example of
+| a locale sensitive interface). Issue "SELECT CURRENT
+| LOCALE FROM SYSIBM.SYSDUMMY1" to determine the
+| value of the LOCALE in use by your program. Possible
+| reasons for this message include an incorrect LOCALE bind
+| option, or an incorrect LOCALE default value specified at
+| installation time (The value of a Locale is not validated until it
+| is needed in a Locale sensitive interface). Because Locales are
+| dynamic in nature, they can be added, created, or deleted at
+| anytime, they are not validated until they are used. Therefore,
+| it is possible to specify a locale that is not valid at installation
+| or bind time.
+| Destination: 42708
+-240 THE PART CLAUSE OF A LOCK TABLE
+STATEMENT IS INVALID
+Explanation: The LOCK TABLE statement is invalid for one
+of the following reasons:
+ The table space in which the table resides is not partitioned
+or does not have the LOCKPART YES attribute, and
+the PART clause is specified.
+ An integer specified in the PART clause does not identify a
+partition of the table space.
+System Action: The LOCK TABLE statement cannot be executed.
+Programmer Response: Determine whether the specified
+table resides in a partitioned table space defined with
+LOCKPART YES.
+ If it is partitioned and defined with LOCKPART YES,
+specify a PART clause that identifies the partition you want
+to lock.
+ If it is partitioned but does not have the LOCKPART YES
+attribute and you want to lock a single partition, use
+ALTER TABLESPACE to change the LOCKPART attribute
+to YES.
+ If it is not partitioned, do not specify the PART clause.
+Destination: 428B4
+-250 THE LOCAL LOCATION NAME IS NOT
+DEFINED WHEN PROCESSING A
+THREE-PART OBJECT NAME
+Explanation: A three-part object name (table, view, or alias)
+cannot be used until the local location name is defined.
+System Action: Install or reinstall the DB2 distributed data
+facility (DDF) with a registered location name for local DB2.
+Programmer Response: Define the local location name and
+then retry the function.
+Destination: 42718
+-251 TOKEN name IS NOT VALID
+| Explanation: The token might be either a location name, or
+| a WLM environment name.
+A location name cannot contain alphabetic extenders. (The
+standard alphabetic extenders in the United States are #, @,
+$.)
+| A WLM environment name must be a long SQL identifier that
+| does not contain the underscore character.
+System Action: The statement cannot be executed
+| Programmer Response: Correct the name and reissue the
+| failing statement.
+Destination: 42602
+ SQL Return Codes 45
+-300  -304
+-300 THE STRING CONTAINED IN HOST VARIABLE
+OR PARAMETER position-number IS NOT
+NUL-TERMINATED
+Explanation: A host variable or parameter is invalid. Its entry
+in the SQLDA is indicated by position-number. The host variable
+or parameter is a C string variable that is one of the
+following:
+|  Used as an input parameter to a stored procedure or func|
+tion.
+|  Returned as an output parameter from a stored procedure
+| or function.
+ Referenced as an input variable in an embedded SQL
+statement.
+ Used to provide a value for a parameter marker of a
+dynamic SQL statement.
+If the data type of the variable is character string, it is invalid
+because it does not include X'00'. If the data type of the variable
+is graphic string, it is invalid because it does not include
+X'0000'.
+System Action: The statement cannot be executed.
+Programmer Response: Append a NUL-terminator to the
+end of the string.
+Destination: 22024
+-301 THE VALUE OF INPUT HOST VARIABLE OR
+PARAMETER NUMBER position-number
+CANNOT BE USED AS SPECIFIED BECAUSE
+OF ITS DATA TYPE
+Explanation: DB2 received data that could not be used as
+specified in the statement because its data type is incompatible
+with the requested operation.
+| The position-number identifies either the host variable number
+| (if the message is issued as a result of an INSERT, UPDATE,
+| DELETE, SELECT, VALUE INTO, or SET assignment state|
+ment), or the parameter number (if the message is issued as
+| the result of a CALL statement, or the invocation of a function)
+-305  -313
+Programmer Response: Verify that table definitions are
+current, and that the host variable has the correct data type.
+See the explanation for SQLCODE -405 for ranges of SQL
+data types.
+Destination: 22003
+-305 THE NULL VALUE CANNOT BE ASSIGNED TO
+OUTPUT HOST VARIABLE NUMBER positionnumber
+BECAUSE NO INDICATOR VARIABLE
+IS SPECIFIED
+Explanation: A FETCH, SELECT, VALUES INTO, or SET
+assignment statement resulted in the retrieval of a null value to
+be inserted into the output host variable, designated by entry
+number 'position-number' of the output SQLDA, for which no
+indicator variable was provided. An indicator variable must be
+supplied if a column returns a null value.
+System Action: The statement cannot be executed. No data
+was retrieved.
+Programmer Response: Examine the definition of the table
+that is the object of the statement and correct the application
+program to provide indicator variables for all host variables into
+which null values can be retrieved. This includes host variables
+for columns which can contain null values and host variables
+which receive the results of column functions whose result
+table could be empty.
+Destination: 22002
+-309 A PREDICATE IS INVALID BECAUSE A REFERENCED
+HOST VARIABLE HAS THE NULL
+VALUE
+Explanation: The statement could not be processed because
+a host variable appearing in a predicate such as
+column-name = host-variable
+had the NULL value. Such a predicate is not permitted when
+the host variable contains the NULL value even though the
+object column might contain nulls.
+System Action: The statement cannot be executed.
+Programmer Response: Rebind the plan or package containing
+the statement. The condition described is not an error
+in DB2 Version 2 Release 3 and later releases.
+Destination: 22512
+-310 DECIMAL HOST VARIABLE OR PARAMETER
+number CONTAINS NON-DECIMAL DATA
+| Explanation: DB2 received nondecimal data from either an
+| application (in the form of a host variable), function or a stored
+| procedure (in the form of a parameter that was passed to or
+| from function or a stored procedure).
+| number Identifies either the host variable number (if the
+| message is issued as a result of an INSERT,
+| UPDATE, DELETE, SELECT, VALUES INTO, or
+| SET assignment statement statement), or the
+| parameter number (if the message is issued as the
+| result of the invocation of a function, or a CALL
+| statement).
+System Action: The statement cannot be executed.
+Programmer Response: Correct the application program or
+stored procedure. Ensure that all decimal variables or parameters
+contain valid System/370 packed decimal numbers.
+Destination: 22023
+-311 THE LENGTH OF INPUT HOST VARIABLE
+NUMBER position-number IS NEGATIVE OR
+GREATER THAN THE MAXIMUM
+Explanation: When evaluated, the length specification for
+input host string variable, whose entry in the SQLDA is indicated
+by position-number, was negative or greater than the
+maximum.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the program to ensure that
+the lengths of all host string variables are not negative or that
+they are not greater than the maximum allowed length.
+Destination: 22501
+-312 variable-name IS AN UNDEFINED OR UNUSABLE
+HOST VARIABLE OR IS USED IN A
+DYNAMIC SQL STATEMENT OR A TRIGGER
+DEFINITION
+Explanation: The host variable variable-name appears in the
+SQL statement, but:
+ The SQL statement is a prepared statement, or
+ The attributes of the variable are inconsistent with its
+usage in the static SQL statement, or
+ The variable is not declared in the application program or
+|  The variable appeared in one of the triggered SQL state|
+ments in a CREATE TRIGGER statement.
+System Action: The statement cannot be executed.
+Programmer Response: Verify that
+ The variable name is spelled properly in the SQL statement.
+ The variable is allowed in the SQL statement.
+ The application program contains a declaration for that variable.
+ The attributes of the variable are compatible with its use in
+the statement.
+Destination: 42618
+-313 THE NUMBER OF HOST VARIABLES SPECIFIED
+IS NOT EQUAL TO THE NUMBER OF
+PARAMETER MARKERS
+Explanation: The number of host variables specified in the
+EXECUTE or OPEN statement is not the same as the number
+of parameter markers (question marks) appearing in the prepared
+SQL statement.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the application program so
+that the number of host variables specified in the EXECUTE or
+OPEN statement is the same as the number of parameter
+# markers appearing in the prepared SQL statement. The
+# DESCRIBE INPUT SQL statement can be used to determine
+# the expected number of input parameter markers.
+Destination: 07001
+ SQL Return Codes 47
+-314  -332
+-314 THE STATEMENT CONTAINS AN AMBIGUOUS
+HOST VARIABLE REFERENCE
+Explanation: A host variable used in the statement has been
+defined more than once in this application program causing
+confusion as to which host variable defined should be used.
+System Action: The statement cannot be executed.
+Programmer Response: Make the host variable unique or
+use qualifications to indicate which host variable definition is to
+be used.
+Destination: 42714
+-327 THE ROW CANNOT BE INSERTED BECAUSE
+IT IS OUTSIDE THE BOUND OF THE PARTITION
+RANGE FOR THE LAST PARTITION
+Explanation: When a row is inserted, the calculated partition
+key value for the new row must be within the bounds of a partition
+(as specified in the VALUES clause of the CREATE
+INDEX statement).
+System Action: The statement cannot be executed.
+Programmer Response: Correct the statement to specify a
+value for the partition key that is within the bounds of the last
+partition of the partitioned table space.
+Destination: 22525
+-330 A STRING CANNOT BE USED BECAUSE IT
+CANNOT BE TRANSLATED. REASON reasoncode,
+CHARACTER code-point, HOST VARIABLE
+position-number
+Explanation: A translation error occurred during the translation
+of a string to a different coded character set. The type of
+error is indicated by the reason-code:
+8 Length exception (for example, expansion required for
+PC MIXED data exceeds the maximum length of the
+string).
+12 Invalid code point (for example, use of the
+ERRORBYTE option of SYSSTRINGS).
+16 Form exception (for example, invalid MIXED data).
+20 Translate procedure error (for example, an exit set the
+length control field of the string to an invalid value).
+24 SBCS character found in string contained in a wchar_t
+host variable.
+If the reason-code is 12, code-point is the invalid code point.
+Otherwise, code-point is either blank or an additional reasoncode
+returned by an exit. If the string is the value of an input
+host variable, the position-number is the ordinality of the variable
+in the SQLDA. If the string is not the value of a host variable,
+the position-number is blank.
+System Action: The statement cannot be executed.
+Programmer Response: Take one of the following actions
+based on the reason-code
+ If the reason-code is 8, extend the maximum length of the
+host variable to allow for the expansion that occurs when
+the string is translated.
+ If the reason-code is 12, either change the translate table
+to accept the code-point or the data to eliminate the codepoint.
+ If the reason-code is 16 and the string is described as
+MIXED data, either change its description or the string to
+conform to the rules for well-formed mixed data.
+ If the reason-code is 20, correct the translate procedure.
+ If the reason-code is 24, delete the SBCS character from
+the graphic string.
+Destination: 22021
+-331 A STRING CANNOT BE ASSIGNED TO A
+HOST VARIABLE BECAUSE IT CANNOT BE
+TRANSLATED. REASON reason-code, CHARACTER
+code-point, POSITION position-number
+Explanation: The operation required the translation of a
+string to the coded character set of the host variable and a
+translation error occurred. The type of error is indicated by the
+'reason-code':
+ 8 for length exception (e.g., expansion required for PC
+MIXED data exceeds the maximum length of the string).
+ 12 for invalid 'code point' (e.g., use of the ERRORBYTE
+option of SYSSTRINGS).
+ 16 for form exception (e.g., invalid MIXED data).
+ 20 for translate procedure error (e.g., an exit set the length
+control field of the string to an invalid value).
+If the 'reason-code' is 12, 'code-point' is the invalid 'code
+point'. Otherwise, 'code-point' is blank. The
+'position-number' is the ordinality of the output variable in the
+SQLDA.
+System Action: The statement cannot be executed.
+Programmer Response: If the 'reason-code' is 8, the
+maximum length of the result column must be extended to
+allow for the expansion that occurs when the string is translated.
+If the 'reason-code' is 12, either the translate table must
+be changed to accept the 'code-point' or the data must be
+changed to eliminate the 'code point'. If the 'reason-code' is
+16, and the string is described as MIXED data, either its
+description must be changed or the string must be changed to
+conform to the rules for well-formed MIXED data. If the
+'reason-code' is 20, the translate procedure must be corrected.
+An alternative to these corrective actions is to provide
+an indicator variable so that a null value and a warning can be
+returned rather than an error. Refer to Chapter 3 of DB2 SQL
+Reference for more information on coded character set.
+Destination: 22021
+-332 SYSSTRINGS DOES NOT DEFINE A TRANSLATION
+FROM CCSID ccsid TO ccsid
+Explanation: The operation required a translation of a string
+to a different coded character set, but the particular translation
+# is not described in the SYSSTRINGS catalog table nor could
+# translation be externalized. The first ccsid identifies the coded
+character set of the string and the second ccsid identifies the
+coded character set to which it must be translated.
+System Action: The statement cannot be executed.
+Programmer Response: If the CCSIDs are correct, the only
+corrective action is to provide for the translation by inserting a
+row into SYSSTRINGS. For an SBCS translation, the row must
+contain a translate table or the name of a user-provided translate
+procedure. For a DBCS translation, the row must contain
+the name of a user-provided translate procedure. Refer to
+48 Messages and Codes 
+-333  -352
+Chapter 3 of DB2 SQL Reference for more information on
+coded character set.
+Destination: 57017
+-333 THE SUBTYPE OF A STRING VARIABLE IS
+NOT THE SAME AS THE SUBTYPE KNOWN
+AT BIND TIME AND THE DIFFERENCE
+CANNOT BE RESOLVED BY TRANSLATION
+Explanation: The CCSID in the run time SQLDA is inconsistent
+with the bind time subtype of the host variable or
+parameter marker. Either the run time description is BIT and
+the bind time description was not BIT, or the run time
+description is not BIT and the bind time description was BIT.
+System Action: The statement cannot be executed.
+Programmer Response: Change the CCSID in the SQLDA
+so that the subtype of the host variable is consistent with the
+# bind time subtype of the host variable or parameter marker. If
+# the input data in error is a parameter marker, you can use the
+# DESCRIBE INPUT SQL statement to determine the expected
+# SQLTYPE, SQLLEN and CCSID expected. Refer to Chapter 3
+of DB2 SQL Reference for more information on coded character
+set.
+Destination: 56010
+-338 AN ON CLAUSE IS INVALID
+Explanation: This return code reports a violation of one of
+the following:
+ One expression of the predicate must only reference
+columns of one of the operand tables of the associated join
+operator, full join, and the other expression of the predicate
+must only reference columns of the other operand table.
+ A VALUE or COALESCE function is allowed in the ON
+clause only when the join operator is a FULL OUTER JOIN
+or FULL JOIN.
+ An operator other than '=' is not allowed in a FULL OUTER
+JOIN or FULL JOIN.
+ A subquery is not allowed in the ON clause.
+
+System Action: The statement cannot be executed.
+Programmer Response: Correct the syntax so that it doesn't
+violate any of the above items within the ON clause
+Destination: 42972
+-339 THE SQL STATEMENT CANNOT BE EXECUTED
+FROM AN ASCII BASED DRDA APPLICATION
+REQUESTOR TO A V2R2 DB2
+SUBSYSTEM
+Explanation: The application is connected to a DB2 Version
+2 Release 3 database server. The SQL statement is using an
+alias or three-part name, which refers to another DB2 subsystem
+that is at the Version 2 Release 2 level. DB2 Version 2
+Release 2 does not support character conversion. Since the
+execution of SQL statements from an ASCII DRDA requester
+to an EBCDIC Version 2 Release 2 DB2 server could require
+character conversion, access to the Version 2 Release 2 DB2
+is denied for data integrity reasons.
+System Action: The statement cannot be executed.
+Programmer Response: Remove statements from the application
+that resolve to a DB2 Version 2 Release 2 subsystem.
+System Programmer Response: If the application must refer
+to the Version 2 Release 2 subsystem data, the Version 2
+Release 2 DB2 subsystem must be migrated to Version 2
+Release 3 where character conversion is supported.
+Destination: 56082
+| -350 INVALID SPECIFICATION OF A LARGE
+| OBJECT COLUMN
+| Explanation: The ALTER TABLE, CREATE TABLE, or
+| CREATE INDEX statement is invalid for one of the following
+| reasons:
+|  A LOB column cannot be added to a temporary table.
+|  A LOB column cannot be added to a table defined with an
+| EDITPROC.
+|  The PRIMARY KEY clause cannot specify a LOB column
+| as a column of the primary key.
+|  The referential-constraint clause cannot specify a LOB
+| column as a column of a foreign key.
+|  The CREATE INDEX statement cannot name a LOB
+| column as a column of the index key.
+|  A LOB column cannot be specified in a references clause.
+| System Action: The statement cannot be executed.
+| Programmer Response: Correct the syntax and resubmit the
+| statement.
+| Destination: 42962
+-351 AN UNSUPPORTED SQLTYPE WAS
+ENCOUNTERED IN POSITION position-number
+OF THE SELECT-LIST
+Explanation: position-number is the position of the first
+element in the SQLDA with an unsupported data type. Either
+the application requestor or the application server does not
+have support for this type. This error can only occur in a
+client/server environment.
+System Action: The statement cannot be executed.
+Programmer Response: Change the statement to exclude
+the unsupported data type. For a select statement, remove the
+names of any columns in the select-list with the unsupported
+data types.
+Destination: 56084
+| -352 AN UNSUPPORTED SQLTYPE WAS
+| ENCOUNTERED IN POSITION position-number
+| OF THE INPUT-LIST
+| Explanation: The input SQLDA for an OPEN, EXECUTE,
+| FETCH, or CALL statement contains an unsupported
+| SQLTYPE for the parameter in position position-number.
+| position-number is the position of the first element in the
+| SQLDA with an unsupported data type. Either the application
+| requestor or the application server does not have support for
+| this data type. This error can only occur in a client/server envi|
+ronment.
+| System Action: The statement cannot be executed.
+| Programmer Response: Change the SQLDA to exclude the
+| unsupported data type.
+ SQL Return Codes 49
+-355  -396
+| Destination: 56084
+| -355 A LOB COLUMN IS TOO LARGE TO BE
+| LOGGED
+| Explanation: One of the following has occurred:
+|  a CREATE TABLE statement for an auxiliary table stores a
+| BLOB, CLOB or DBCLOB column whose length exceeds 1
+| gigabyte but whose associated LOB table space was
+| defined with the LOG YES attribute
+|  an ALTER TABLESPACE statement of a LOB table space
+| specifies the LOG YES clause but the auxiliary table in the
+| LOB table space stores a BLOB or CLOB column whose
+| length exceeds 1 gigabyte or a DBCLOB column whose
+| length exceeds 500 megabyte characters
+| System Action: The statement cannot be executed.
+| Programmer Response: Either change the attribute of the
+| LOB table space to LOG NO or drop the base table, and
+| recreate it with columns of an acceptable length for logging.
+| Destination: 42993
+# -359 THE RANGE OF VALUES FOR THE IDENTITY
+# COLUMN IS EXHAUSTED
+# Explanation: An INSERT statement was issued against a
+# table with an identity column; however all allowable values for
+# the identity column data type have already been assigned.
+# System Action: The statement cannot be executed.
+# Programmer Response: Redefine the table to use a data
+# type on the identity column that supports a larger range of
+# values. For example, if SMALLINT is currently specified,
+# change the data type for the identity column to INTEGER.
+# Destination: 23522
+# -372 ONLY ONE ROWID OR IDENTITY COLUMN IS
+# ALLOWED IN A TABLE
+# Explanation: An attempt was made to do one of the
+# following:
+|  Create a table with more than one ROWID column.
+|  Add a ROWID column to a table that already has one.
+#  Create a table with more than one identity column.
+#  Add an identity column to a table that already has one.
+| System Action: The statement was not executed.
+| Programmer Response: For a CREATE TABLE statement,
+# select only one column to have the row ID data type or the AS
+# IDENTITY attribute. For an ALTER TABLE statement, a
+# ROWID column or identity column already exists for the table.
+| Do not attempt to add another column with the data type row
+# ID or with the AS IDENTITY attribute to the table.
+| Destination: 428C1
+# -373 DEFAULT CANNOT BE SPECIFIED FOR IDEN#
+TITY COLUMN column-name
+# Explanation: A DEFAULT clause may not be specified for a
+# column that has been identified as an IDENTITY column.
+# System Action: The statement cannot be executed.
+# Programmer Response: Remove the DEFAULT clause and
+# resubmit the statement.
+# Destination: 42623
+| -390 THE FUNCTION function-name, SPECIFIC
+| NAME specific-name, IS NOT VALID IN THE
+| CONTEXT IN WHICH IT OCCURS
+| Explanation: A function resolved to a specific function that is
+| not valid in the context where it is used. If specific-name is an
+| empty string, then the function resolved to the built-in function
+| identified by function-name. Some of the possible situations
+| include:
+|  A scalar or column function is referenced where only a
+| table function is allowed (such as in the FROM clause of a
+| query).
+|  A table function is referenced where only a scalar or
+| column function is allowed (such as in an expression, or in
+| a SOURCE clause of a CREATE FUNCTION statement).
+| System Action: The statement cannot be executed.
+| Programmer Response: Ensure that the correct function
+| name and arguments are specified and that the SQL path
+| includes the schema where the correct function is defined. You
+| may need to change the function name, arguments, SQL path
+| (using SET CURRENT PATH or the PATH bind option), or
+| change the context in which the function is used. Refer to
+| Chapter 6 of DB2 SQL Reference for information on the use of
+| functions.
+| Destination: 42887
+| -392 SQLDA PROVIDED FOR CURSOR cursor HAS
+| BEEN CHANGED FROM THE PREVIOUS
+| FETCH
+| Explanation: The application is running with DB2 rules, and
+| has requested that LOB data be returned as a LOB in one
+| FETCH statement, and as a locator in another FETCH state|
+ment. This is not permitted.
+| System Action: The statement cannot be executed.
+| Programmer Response: Either do not use DB2 rules, or
+| change to application to not change the data type code from
+| LOB to locator (or the reverse) in the SQLDA between succes|
+sive fetches.
+| Destination: 42855
+| -396 object-type object-name ATTEMPTED TO
+| EXECUTE AN SQL STATEMENT DURING
+| FINAL CALL PROCESSING
+| Explanation: A user-defined function named object-name
+| was invoked and attempted to execute an SQL statement
+| (other than CLOSE CURSOR) during final call processing, but
+| the statement is not allowed.
+| System Action: The SQL statement cannot be executed.
+| Programmer Response: Change the definition of the func|
+tion to not issue SQL statements during final call processing.
+50 Messages and Codes 
+-397  -405
+| Destination: 38505
+| -397 THE OPTION GENERATED IS SPECIFIED
+| WITH A COLUMN THAT IS NOT A ROW ID OR
+| DISTINCT TYPE BASED ON A ROW ID
+| Explanation: GENERATED was specified in a CREATE or
+| ALTER TABLE statement for a column with a data type that is
+| not a row ID, and is not a distinct type that is based on a row
+| ID. GENERATED can only be specified for a column with a
+| data type of row ID, or a distinct type that is based on a row
+| ID.
+| System Action: The statement cannot be executed.
+| Programmer Response: Correct the statement. Either elimi|
+nate the GENERATED clause or ensure that the data type of
+| the object is row ID.
+| Destination: 428D3
+| –398 A LOCATOR WAS REQUESTED FOR HOST
+| VARIABLE NUMBER position-number BUT THE
+| VARIABLE IS NOT A LOB
+| Explanation: The application requested that a locator be
+| returned from host variable number position-number. A locator
+| can only be used with LOB data, and the requested data is not
+| a LOB.
+| System Action: The statement cannot be executed.
+| Programmer Response: Change the statement to either
+| return LOB data, or change the target host variable to not be a
+| locator.
+| Destination: 428D2
+| -399 ATTEMPTED TO INSERT AN INVALID VALUE
+| INTO A ROWID COLUMN
+| Explanation: When inserting into a table, a value specified
+| for a ROWID column was invalid.
+| System Action: The INSERT is not performed.
+| Programmer Response: Do not attempt to generate any
+| value for insertion into a ROWID column. Insertion into
+| ROWID columns is supported for purposes of Data Propa|
+gation, where DB2 has previously generated the row ID values.
+| Only row ID values previously generated by DB2 can be used
+| as values for insertion into a row ID column. Alternatively,
+| insert the row specifying DEFAULT for the ROWID column or
+| remove the ROWID column from the insert column-list.
+| Destination: 22511
+-400 THE CATALOG HAS THE MAXIMUM NUMBER
+OF USER DEFINED INDEXES
+Explanation: Only one hundred user-defined indexes can be
+created in the catalog database.
+System Action: The statement cannot be executed.
+Programmer Response: If this index must be created,
+another user-defined index on the catalog must be dropped.
+After that index is dropped, this statement can be executed.
+Destination: 54027
+-401 THE OPERANDS OF AN ARITHMETIC OR
+COMPARISON OPERATION ARE NOT COMPARABLE
+Explanation: An arithmetic operation appearing within the
+# SQL statement contains a mixture of numeric and non-numeric
+operands, or the operands of a comparison operation are not
+compatible.
+# One reason for this error is that the comparison involves both
+# character and graphic operands. This combination of operands
+# is not allowed.
+System Action: The statement cannot be executed.
+Programmer Response: Check the data types of all operands
+to ensure that their data types are comparable and compatible
+with their usage in the statement.
+If all the operands of the SQL statement are correct, then, if a
+view is being accessed, check the data types of all the operands
+in the view definition.
+Destination: 42818
+-402 AN ARITHMETIC FUNCTION OR OPERATOR
+arith-fop IS APPLIED TO CHARACTER OR
+DATETIME DATA
+Explanation: A nonnumeric operand has been specified for
+the arithmetic function or operator 'arith-fop'.
+System Action: The statement cannot be executed.
+Programmer Response: Examine and correct the syntax of
+the SQL statement such that all operands of the specified function
+or operator are numeric.
+Destination: 42819
+-404 THE SQL STATEMENT SPECIFIES A STRING
+THAT IS TOO LONG
+| Explanation: An INSERT, UPDATE, CALL, VALUES INTO,
+| SET, parameter, host variable, or transition variable statement
+| specifies a value that is longer than the maximum length string
+| that can be stored in the indicated column.
+System Action: The statement cannot be executed.
+Programmer Response: Check the length of the target
+column, parameter, host variable or transition variable and
+correct the program or SQL statement so that the length of the
+string does not exceed that maximum. For example, you could
+use the SUBSTR function to shorten the string.
+Destination: 22001
+-405 THE NUMERIC LITERAL literal CANNOT BE
+USED AS SPECIFIED BECAUSE IT IS OUT OF
+RANGE
+Explanation: The specified numeric literal is not in the proper
+range.
+The proper ranges for SQL values are as follows:
+ 5.4E−79 to 7.2E+75 for FLOAT values
+ −(1031 -1) to +(1031 -1) for DECIMAL values
+ −2147483648 to 2147483647 for INTEGER values
+ −32768 to +32767 for small integer (SMALLINT) values.
+System Action: The statement cannot be executed.
+Programmer Response: The value of the literal should be
+reduced to the appropriate size for this data type.
+ SQL Return Codes 51
+-406  -412
+Destination: 42820
+-406 A CALCULATED OR DERIVED NUMERIC
+VALUE IS NOT WITHIN THE RANGE OF ITS
+OBJECT COLUMN
+Explanation: A value derived or calculated during processing
+of the SQL statement was outside the range of the data type of
+its object column. This problem might have arisen because
+either the values occurring in the object column were out of
+range, or the SQL operation performed was not appropriate for
+the values in the object column.
+System Action: The statement cannot be executed.
+Programmer Response: See the explanation of SQLCODE
+-405 for allowed ranges for numeric data types.
+Destination: 22003
+| -407 AN UPDATE, INSERT, OR SET VALUE IS
+| NULL, BUT THE OBJECT COLUMN column|
+name CANNOT CONTAIN NULL VALUES
+Explanation: One of the following conditions occurred:
+ A null insert or update value was specified for a column
+defined as NOT NULL.
+ No insert value was provided for a column that does not
+have a default value.
+|  A SET transition variable statement specified a NULL value
+| for column defined as NOT NULL.
+ The insert value was DEFAULT, but the object column was
+declared as NOT NULL without WITH DEFAULT in the
+table definition. Consequently, a default value of NULL
+cannot be inserted into that column.
+|  A null insert value was specified for a ROWID column.
+System Action: The statement cannot be executed. The
+'column-name' might be returned in the SQLCA, depending
+on the syntax of the SQL statement in which the error was
+detected.
+| Programmer Response: Examine the definition of the object
+| table to determine which columns of the table have the NOT
+| NULL attribute or have a type of ROWID, and correct the SQL
+| statement accordingly.
+Destination: 23502
+-408 THE VALUE IS NOT COMPATIBLE WITH THE
+DATA TYPE OF ITS TARGET
+# Explanation: The data type of the value to be assigned to
+# the column, parameter, host variable or transition variable by
+# the SQL statement is incompatible with the declared data type
+# of the assignment target. Both must be:
+#  Numeric
+#  Character
+#  Graphic
+#  Dates or character
+#  Times or character
+#  Timestamps or character
+#  Row IDs
+#  The same distinct types
+However, dates, times, or timestamps cannot be assigned to a
+character column that has a field procedure.
+This SQLCODE is issued for any statement that fails required
+assignment rule checking.
+System Action: The statement cannot be executed.
+Programmer Response: Examine the current definition for
+the object table, procedure, user-defined function, or host variable
+and ensure that the host variable or literal value that is
+assigned to the object has the proper data type. In some
+cases, you can convert the value to the proper data type by
+using a function such as CHAR or DECIMAL.
+Destination: 42821
+-409 INVALID OPERAND OF A COUNT FUNCTION
+Explanation: The operand of the COUNT function in the
+statement violates SQL syntax. A common error is a column
+name or other expression without DISTINCT.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the syntax and resubmit the
+statement. Refer to Chapter 4 of DB2 SQL Reference for information
+about the proper form for the operands of a COUNT
+function.
+Destination: 42607
+-410 THE FLOATING POINT LITERAL literal CONTAINS
+MORE THAN 30 CHARACTERS
+Explanation: The specified floating-point literal is more than
+30 characters in length. A floating-point literal has a maximum
+length of 30 characters.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the indicated literal.
+Destination: 42820
+-411 CURRENT SQLID CANNOT BE USED IN A
+STATEMENT THAT REFERENCES REMOTE
+OBJECTS
+Explanation: A reference to the CURRENT SQLID special
+register is invalid in a statement that contains the three-part
+name or alias of an object that is remote to the remote server.
+System Action: The statement cannot be executed.
+Programmer Response: Either remove the reference to
+CURRENT SQLID or the reference to the remote object.
+Destination: 56040
+-412 THE SELECT CLAUSE OF A SUBQUERY
+SPECIFIES MULTIPLE COLUMNS
+Explanation: In the context in which it was used in the SQL
+statement, the subquery can have only one column specified in
+its SELECT clause.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the syntax of the SQL
+statement. Refer to Chapter 5 of DB2 SQL Reference for information
+about restrictions on the syntax for subqueries.
+Destination: 42823
+52 Messages and Codes 
+-413  -420
+-413 OVERFLOW OCCURRED DURING NUMERIC
+DATA TYPE CONVERSION
+Explanation: During processing of the SQL statement, an
+overflow condition arose when converting from one numeric
+type to another. Numeric conversion is performed according to
+the standard rules of SQL.
+System Action: The statement cannot be processed. No
+data was retrieved, updated, or deleted.
+Programmer Response: Examine the syntax of the SQL
+statement to determine the cause of the error. If the problem
+is data-dependent, it might be necessary to examine the data
+processed at the time of the error.
+Destination: 22003
+-414 A LIKE PREDICATE IS INVALID BECAUSE
+THE FIRST OPERAND IS NOT A STRING
+Explanation: The data type of the first operand of the LIKE
+predicate must be a character string or graphic string.
+System Action: The statement cannot be executed.
+Programmer Response: Respecify the predicate so that the
+data type of each operand is a character string or a graphic
+string.
+Destination: 42824
+-415 THE CORRESPONDING COLUMNS, columnnumber,
+OF THE OPERANDS OF A UNION OR
+A UNION ALL DO NOT HAVE COMPARABLE
+COLUMN DESCRIPTIONS
+Explanation: The column descriptions of corresponding
+columns of the operands of a UNION or UNION ALL must be
+comparable. The columns of ordinality 'column-number' of the
+operands in this UNION or UNION ALL do not satisfy this
+requirement. For columns to be comparable, they must both be
+either numeric, character, graphic, date, time, or timestamp.
+They cannot be a mixture of these groups. If corresponding
+columns have field procedures, they must both have the same
+field procedure.
+System Action: The statement cannot be executed.
+Programmer Response: Check the data types of the specified
+columns and correct the UNION or UNION ALL statement
+so that all corresponding columns have comparable column
+descriptions.
+Destination: 42825
+-416 AN OPERAND OF A UNION CONTAINS A
+LONG STRING COLUMN
+Explanation: The UNION specified in the SQL statement
+could not be performed because one of the tables participating
+in the union contains a long string column (for example, a
+VARCHAR column with length greater than 255). The operands
+of a UNION cannot contain long string columns.
+System Action: The statement cannot be executed.
+Programmer Response: The implied function is not supported
+by DB2. Refer to Chapter 3 of DB2 SQL Reference for
+information about restrictions on the manipulation of long string
+columns.
+Destination: 42907
+-417 A STATEMENT STRING TO BE PREPARED
+INCLUDES PARAMETER MARKERS AS THE
+OPERANDS OF THE SAME OPERATOR
+Explanation: The statement string specified as the object of
+a PREPARE contains a predicate or expression where parameter
+markers have been used as operands of the same
+operator—for example:
+? > ?
+This syntax is not permitted.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the logic of the application
+program so that this syntax error does not occur. Refer to
+Chapter 6 of DB2 SQL Reference for information about the
+proper usage of parameter markers within SQL statements to
+be prepared.
+Destination: 42609
+-418 A STATEMENT STRING TO BE PREPARED
+CONTAINS AN INVALID USE OF PARAMETER
+MARKERS
+Explanation: Parameter markers cannot be used in the
+SELECT list, as the sole argument of a scalar function, or in a
+concatenation operation. Parameter markers cannot be used in
+the string expression of an EXECUTE IMMEDIATE SQL statement.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the logic of the application
+program so that this error does not occur. Refer to Chapter 6
+of DB2 SQL Reference for information about the proper usage
+of parameter markers within SQL statements and for
+EXECUTE IMMEDIATE SQL statement restrictions.
+Destination: 42610
+-419 THE DECIMAL DIVIDE OPERATION IS INVALID
+BECAUSE THE RESULT WOULD HAVE A
+NEGATIVE SCALE
+Explanation: The decimal division is invalid because it will
+result in a negative scale.
+The formula used internally to calculate the scale of the result
+for decimal division is explained in Chapter 3 of DB2 SQL Reference.
+System Action: The statement cannot be executed. No data
+was retrieved, updated, or deleted.
+Programmer Response: Examine the precision and scale of
+all columns that may have participated in a decimal division.
+Note that an integer or small integer value may have been
+converted to decimal for this calculation.
+Destination: 42911
+-420 THE VALUE OF A CHARACTER STRING
+ARGUMENT WAS NOT ACCEPTABLE TO THE
+function-name FUNCTION
+Explanation: A character string argument did not conform to
+the requirements of the function. For example, a character
+string passed to the DECIMAL function did not conform to the
+rules for forming an SQL integer or decimal constant.
+System Action: The statement cannot be executed.
+ SQL Return Codes 53
+-421  -435
+Programmer Response: Change the argument value so that
+it conforms to the requirements of the function as specified in
+DB2 SQL Reference.
+Destination: 22018
+-421 THE OPERANDS OF A UNION OR UNION ALL
+DO NOT HAVE THE SAME NUMBER OF
+COLUMNS
+Explanation: The operands of a UNION or UNION ALL must
+have the same number of columns.
+System Action: The statement cannot be executed.
+Programmer Response: Correct the SQL statement so that
+there are exactly the same number of columns in each
+operand.
+Destination: 42826
+| -423 INVALID VALUE FOR LOCATOR IN POSITION
+| position-#
+| Explanation: The value specified in a result set locator host
+| variable or a LOB locator host variable specified at position
+| position-# in the locator variable list of the SQL statement does
+| not identify a valid result set locator or LOB locator variable,
+| respectively.
+| System Action: The statement cannot be executed.
+| Programmer Response: For a result set locator there are
+| two common causes for the error:
+|  The host variable used as a result set locator was never
+| assigned a valid result set locator value. Result set locator
+| values are returned by the DESCRIBE PROCEDURE and
+| ASSOCIATE LOCATORS statements. Make sure the value
+| in your host variable is obtained from one of these state|
+ments.
+|  Result set locator values are only valid as long as the
+| underlying SQL cursor is open. If a commit or rollback
+| operation closes an SQL cursor, the result set locator
+| associated with the cursor is no longer valid.
+| For a LOB locator, some common causes for the error are:
+|  The host variable used as a LOB locator was never
+| assigned a valid LOB value.
+|  A commit or rollback operation or an SQL FREE
+| LOCATOR statement freed the locator.
+Destination: 0F001
+-426 DYNAMIC COMMIT NOT VALID AT AN APPLICATION
+SERVER WHERE UPDATES ARE NOT
+ALLOWED
+Explanation: An application executing using DRDA protocols
+has attempted to issue a dynamic COMMIT statement, or a
+stored procedure has attempted to issue a
+COMMIT_ON_RETURN, while connected to a location at
+which updates are not allowed. A dynamic COMMIT or
+COMMIT_ON_RETURN can be issuedonly while connected to
+a location at which updates are allowed.
+System Action: The statement cannot be executed. No
+COMMIT is performed.
+Programmer Response: The IMS or CICS protocols should
+be used to commit work in these environments.
+Destination: 2D528
+-427 DYNAMIC ROLLBACK NOT VALID AT AN
+APPLICATION SERVER WHERE UPDATES
+ARE NOT ALLOWED
+Explanation: An application executing using DRDA protocols
+has attempted to issue a dynamic ROLLBACK statement while
+connected to a location at which updates are not allowed. A
+dynamic ROLLBACK may be issued only while connected to a
+location at which updates are allowed.
+System Action: The statement cannot be executed. No
+ROLLBACK is performed.
+Programmer Response: The IMS or CICS protocols should
+be used to rollback work in these environments.
+Destination: 2D529
+| -430 routine-type routine-name (SPECIFIC NAME
+| specific-name) HAS ABNORMALLY TERMI|
+NATED
+| Explanation: An abnormal termination has occurred while the
+| routine routine-name (stored procedure or function) was in
+| control.
+| System Action: The statement cannot be executed.
+| Programmer Response: The stored procedure or function
+| needs to be fixed. Contact the author of the routine or your
+| database administrator. Until it is fixed, the routine should not
+| be used.
+| Destination: 38503
+| -433 VALUE value IS TOO LONG
+| Explanation: The value 'value' required truncation by a
+| system (built-in) cast or adjustment function, which was called
+| to transform the value in some way. The truncation is not
+| allowed where this value is used. The value being transformed
+| is one of the following:
+|  an argument to a user defined function (UDF)
+|  an input to the SET clause of an UPDATE statement
+|  a value being INSERTed into a table
+|  an input to a cast or adjustment function in some other
+| context.
+| If 'value' has the 'for bit data' subtype, then the 'value' is
+| printed as a hexadecimal string in quotes followed by an X.
+| System Action: The statement cannot be executed.
+| Programmer Response: If 'value' is a literal string in the
+| SQL statement, it is too long for its intended use. If 'value' is
+| not a literal string, examine the SQL statement to determine
+| where the transformation is taking place. Either the input to the
+| transformation is too long, or the target is too short. Correct
+| the problem and rerun the statement.
+| Destination: 22001
+| -435 AN INVALID SQLSTATE sqlstate IS SPECIFIED
+| IN THE FUNCTION RAISE_ERROR OR IN A
+| SIGNAL SQLSTATE STATEMENT
+| Explanation: The SQLSTATE specified in the
+| RAISE_ERROR function or specified in a SIGNAL SQLSTATE
+| statement of a trigger definition does not conform to the rules
+| for an application defined SQLSTATE.
+| System Action: The statement cannot be processed.
+54 Messages and Codes 
+-438  -444
+| Programmer Response: Correct the SQLSTATE specified in
+| the RAISE_ERROR function or SIGNAL statement. The
+| SQLSTATE must be a character string containing exactly 5
+| characters. It must be of type CHAR defined with a length of 5,
+| or a type VARCHAR defined with a length of 5 or greater. The
+| SQLSTATE value must follow the rules for application-defined
+| SQLSTATEs as follows:
+|  Each character must be from the set of digits ('0' through
+| '9') or non-accented upper case letters ('A' through 'Z').
+|  The SQLSTATE class (first two characters) cannot be '00',
+| '01' or '02' because these are not error classes.
+|  If the SQLSTATE class (first two characters) starts with the
+| character '0' through '6' or 'A' through 'H', then the sub|
+class (last three characters) must start with a letter in the
+| range 'I' through 'Z'.
+|  If the SQLSTATE class (first two characters) starts with the
+| character '7', '8', '9' or 'I' though 'Z', then the subclass (last
+| three characters) can be any of '0' through '9' or 'A'
+| through 'Z'.
+| Destination: 428B3
+| -438 APPLICATION RAISED ERROR WITH DIAG|
+NOSTIC TEXT: text
+| Explanation: This error occurred as a result of execution of
+| the RAISE_ERROR function or as a result of the SIGNAL
+| SQLSTATE statement.
+| text Diagnostic text provided by the invocation
+| of the RAISE_ERROR function or the
+| SIGNAL SQLSTATE statement.
+| System Action: The statement cannot be processed.
+| Programmer Response: Use application-provided diagnostic
+| text, if provided, to determine the cause of the error.
+| Destination: application-defined
+| -440 NO routine-type BY THE NAME routine-name
+| HAVING COMPATIBLE ARGUMENTS WAS
+| FOUND
+| Explanation: This occurs in a reference to routine (stored
+| procedure or function) routine-name, when DB2 cannot find a
+| function or stored procedure it can use to implement the refer|
+ence. There are several reasons why this could occur.
+|  routine-name was either incorrectly specified or does not
+| exist in the database.
+|  A qualified reference was made, and the qualifier was
+| incorrectly spelled.
+|  A user's current path does not contain the schema to
+| which the desired function belongs, and an unqualified ref|
+erence was used.
+|  The wrong number of arguments were included.
+|  For functions, the data types of one or more of the argu|
+ments is incorrect.
+|  The routine invoker is not authorized to execute the
+| routine.
+| System Action: The statement cannot be executed.
+| Programmer Response: Fix the problem and retry. This
+| could involve a change to the SQL statement, the addition of
+| new routines or a change to the user's current path.
+| Destination: 42884
+| -441 INVALID USE OF 'DISTINCT' OR 'ALL' WITH
+| SCALAR FUNCTION function-name
+| Explanation: The keyword 'DISTINCT' or 'ALL' was detected
+| within parentheses in a reference to function function-name
+| and the function has been resolved as a scalar function. Use
+| of the keyword 'DISTINCT' or 'ALL' with a scalar function is
+| invalid.
+| System Action: The statement cannot be executed.
+| Programmer Response: If a scalar function is being used,
+| then remove the keyword 'DISTINCT' or 'ALL'.
+| If a column function is being used, then there is a problem with
+| function resolution. Check your current path to see if the
+| desired function is in one of the schemas, and also check the
+| SYSIBM.SYSROUTINES catalog for the spelling of the function
+| name and the number and types of parameters.
+| Destination: 42601
+| -443 EXTERNAL FUNCTION function-name (SPE|
+CIFIC NAME specific-name) HAS RETURNED
+| AN ERROR SQLSTATE WITH DIAGNOSTIC
+| TEXT msg-text
+| Explanation: An SQLSTATE of the form 38xxx was returned
+| by function function-name, along with message text msg-text.
+| If the third character is not 5 (i.e. '385xx') then the last 3 char|
+acters of the SQLSTATE value were chosen by the function, to
+| indicate the reason of the failure. SQLSTATEs values of the
+| form 385xx are issued by IBM with a different SQLCODE.
+| System Action: The actions in the external function should
+| be rolled back.
+| Programmer Response: Contact the author of the function
+| or your database administrator. Until the problem is resolved,
+| the function should not be used.
+| Destination: 42601
+-444 USER PROGRAM name COULD NOT BE
+FOUND
+Explanation: DB2 received an SQL CALL statement for a
+| stored procedure or an SQL statement containing an invoca|
+tion of a user-defined function, and found the row in the
+| SYSIBM.SYSROUTINES catalog table associated with the
+requested procedure name. However, the MVS load module
+identified in the LOADMOD column of the
+| SYSIBM.SYSROUTINES row could not be found.
+name The name of the MVS load module that could not
+be found
+System Action: The statement cannot be executed.
+| Programmer Response: If the LOADMOD column value in
+| the SYSIBM.SYSROUTINES table is incorrect, use the
+| -ALTER FUNCTION or -ALTER PROCEDURE command to
+| correct the value.
+If the LOADMOD column value is correct, use the MVS linkage
+editor to create the required MVS load module in one of the
+MVS load libraries used by your installation for stored procedures.
+# This error can also occur if you are invoking a WLM-managed
+# stored procedure that is not APF authorized, and the DB2 load
+# libraries are not in the STEPLIB concatenation because they
+ SQL Return Codes 55
+-449  -456
+# are being loaded from LINKLIST. In this case, if you want the
+# stored procedure program to run APF-authorized, link-edit it
+# with AC=1 into an MVS APF authorized library. If you do not
+# want the stored procedure program to run APF authorized, add
+# the DB2 load library to the STEPLIB concatenation of the JCL
+# used to start the WLM-managed address space.
+Destination: 42724

@@ -1,0 +1,1123 @@
+000 
+SUCCESSFUL EXECUTION
+Explanation: Unqualified successful execution or successful
+execution with one or more warnings. If SQLWARN0 is blank,
+there are no warnings. If SQLWARN0 = W, at least one of the
+other warning indicators in the SQLCA has been set to indicate
+a warning condition. For example, SQLWARN1 is used to indicate
+that a value of a string column was truncated when
+assigned to a host variable. SQLWARNx fields are described
+in Appendix C of DB2 SQL Reference.
+Destination: 00000 for unqualified successful execution
+Destination: 01ddd for successful execution with warning
+'ddd'.
+
++012 THE UNQUALIFIED COLUMN NAME columnname
+WAS INTERPRETED AS A CORRELATED
+REFERENCE
+Explanation: The column name does not identify a column of
+a table or view in the FROM clause of the subquery. However,
+it does identify a column of a table or view in a FROM clause
+at a higher level in the statement.
+System Action: The column name is interpreted as a correlated
+reference.
+Programmer Response: If DB2's interpretation of the column
+name was not what you intended, rewrite the SQL statement
+and submit it again. If you intend the column name to refer to a
+table named at a higher level, we advise rewriting the statement
+anyway, using a table name or correlation name as a
+qualifier for the column name. The unqualified column name
+could be interpreted differently if you do a rebind after altering
+one of the tables to which you refer.
+Destination: 01545
++098 A DYNAMIC SQL STATEMENT ENDS WITH A
+SEMICOLON.
+Explanation: The statement string of a PREPARE or
+EXECUTE IMMEDIATE statement is a valid dynamic SQL
+statement, but it ends with a semicolon.
+System Action: The semicolon and any subsequent text are
+ignored.
+Programmer Response: Check that the semicolon is being
+used as a statement terminator.
+Destination: 01568
++100 ROW NOT FOUND FOR FETCH, UPDATE OR
+DELETE, OR THE RESULT OF A QUERY IS AN
+EMPTY TABLE
+Explanation: One of the following conditions occurred:
+ No row met the search conditions specified in an UPDATE
+or DELETE statement.
+ The result of a SELECT INTO statement was an empty
+table.
+ A FETCH statement was executed when the cursor was
+positioned after the last row of the result table.
+ The result of the subselect of an INSERT statement is
+empty.
+When a SELECT statement is executed using SPUFI, this
+SQLCODE indicates normal completion.
+System Action: No data was retrieved, updated, or deleted.
+Destination: 02000
++110 SQL UPDATE TO A DATA CAPTURE TABLE
+NOT SIGNALED TO ORIGINATING SUBSYSTEM
+Explanation: DataPropagator (DPropNR) exit routine issued
+an SQL INSERT, UPDATE, or DELETE statement to a table
+defined with DATA CAPTURE CHANGES. Since data capture
+is already in progress, notification is not sent back to the originating
+IMS subsystem.
+System Action: DB2 changes the data and records the
+change in the log. DB2 does not notify DPropNR's exit routine
+of the change, because doing so might cause the same
+change to be made again.
+Destination: 01561
++111 THE SUBPAGES OPTION IS NOT SUPPORTED
+FOR TYPE 2 INDEXES
+Explanation: You cannot use the SUBPAGES option for type
+2 indexes.
+System Action: The option is ignored and processing continues.
+Programmer Response: Remove the SUBPAGES option to
+get rid of the warning.
+Destination: 01590
++117 THE NUMBER OF INSERT VALUES IS NOT
+THE SAME AS THE NUMBER OF OBJECT
+COLUMNS
+Explanation: The number of insert values in the value list of
+the INSERT statement is not the same as the number of object
+columns specified.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, specify one and only one value for each of the
+specified object columns.
+Destination: 01525
++162 TABLESPACE database-name.tablespace-name
+HAS BEEN PLACED IN CHECK PENDING
+Explanation: The indicated table space is in check pending
+status because the ALTER TABLE statement was used to
+specify a referential constraint or a check constraint (while
+special register CURRENT RULES = 'DB2') on a populated
+table. The table space is not generally available until the
+check pending status is removed from the table space.
+System Action: The table space was placed in check
+pending status.
+20 Messages and Codes 
++203  +220
+Programmer Response: Run the CHECK DATA utility. The
+enforcement of the referential constraint or the check constraint
+is deferred until the CHECK DATA utility is run.
+Destination: 01514
++203 THE QUALIFIED COLUMN NAME column-name
+WAS RESOLVED USING A NON-UNIQUE OR
+UNEXPOSED NAME
+Explanation: The table designator selected to resolve a qualified
+column name is one of the following:
+ An unexposed name
+ An exposed name that has an exposed duplicate in the
+same FROM clause
+ An exposed name that has an unexposed duplicate which
+appears before the selected name in the ordered list of
+names to which the qualifier is compared
+Therefore, the statement does not conform to the guidelines for
+using only unique exposed names as qualifiers or it is possible
+that the column reference was not resolved to the intended
+instance of the table or view.
+System Action: DB2 uses the selected name to resolve the
+reference.
+Programmer Response: If DB2's resolution of the qualifier
+was not what you intended, rewrite the SQL statement and
+submit it again. The rules used to resolve column name qualifiers
+are given in Chapter 3 of DB2 SQL Reference.
+Destination: 01552
++204 name IS AN UNDEFINED NAME
+Explanation: The object identified by 'name' is not defined
+in the DB2 subsystem. This return code can be generated for
+any type of DB2 object.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, determine that the object name was correctly specified
+in the SQL statement (including any required qualifiers). If
+so, ensure that the object exists in the system before resubmitting
+the statement.
+Destination: 01532
++206 column-name IS NOT A COLUMN OF AN
+INSERTED TABLE, UPDATED TABLE, OR ANY
+TABLE IDENTIFIED IN A FROM CLAUSE
+Explanation: This return code is used to report one of these
+errors:
+ In the case of an INSERT or UPDATE statement, the
+specified column is not a column of the table or view that
+was specified as the object of the insert or update.
+ In the case a SELECT or DELETE statement, the specified
+column is not a column of any of the tables or views identified
+in a FROM clause in the statement.
+ There is a correlated reference in GROUP BY.
+ There is an unresolved qualified reference in HAVING.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, verify that the column and table names are specified
+correctly in the SQL statement. In the case of a SELECT
+statement, check to be sure that all of the required tables were
+named in the FROM clause.
+Destination: 01533
++218 THE SQL STATEMENT REFERENCING A
+REMOTE OBJECT CANNOT BE EXPLAINED
+Explanation: The user has used EXPLAIN(YES) on the bind
+subcommand to bind an application which has SQL statement
+referencing a remote object or the user has a static EXPLAIN
+SQL statement which references a remote object in the application
+program. EXPLAIN on a remote object is not supported
+by DB2.
+It is issued at BIND time, and only with VALIDATE(RUN).
+System Action: The plan or package will be bound successfully,
+but no information will be filled in the user's PLAN-TABLE
+for the SQL statement referencing a remote object. An
+SQLCODE -512 will be issued at run time if the EXPLAIN
+statement is found to explain a remote object.
+Destination: 01537
++219 THE REQUIRED EXPLANATION TABLE tablename
+DOES NOT EXIST
+Explanation: The EXPLAIN statement assumes the existence
+of the explanation table and it is not defined in the DB2 subsystem
+as a base table. Refer to Chapter 6 of DB2 SQL Reference
+for more information.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, determine whether the required explanation table
+does exist. If not, create the required table.
+Destination: 01532
++220 THE COLUMN column-name IN EXPLANATION
+TABLE table-name IS NOT DEFINED PROPERLY
+Explanation: An error occurred during the insertion of a row
+into the explanation table. The table is improperly defined for
+the following reasons:
+ A column is missing.
+ Columns are defined in the wrong order.
+ The table contains an extra column.
+ A column description is invalid because of its name, data
+type, length, or null attributes.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+ SQL Return Codes 21
++236  +239
+statement, correct the definition of the required explanation
+table. Refer to Chapter 6 of DB2 SQL Reference for information
+about defining an explanation table.
+Destination: 01546
+| +236 SQLDA INCLUDES integer1 SQLVAR ENTRIES,
+| BUT integer2 ARE REQUIRED FOR integer3
+| COLUMNS
+| Explanation: The value of the SQLN field of the SQLDA
+| should be at least as large as the number of columns being
+| described. integer3 is the number of columns being described.
+| In the case that USING BOTH has been specified, twice as
+| many SQLVAR entries are needed as the number of columns
+| being described.
+| The number of SQLVAR entries that are needed to return all of
+| the information about the columns is integer2.
+| Note: in the case of DESCRIBE INPUT, each reference to
+| column would actually be parameter.
+| System Action: The SQLDAID 7th byte has been set to "on"
+| with a value of 2 indicating that 2 SQLVAR entries are needed
+| for each column. DB2 has not set any SQLVAR entries.
+| Programmer Response: Increase the value of the SQLN
+| field in the SQLDA to the value indicated in the message
+| (making sure the SQLDA is large enough to support that
+| amount) and resubmit the statement.
+| 01005
+| +237 SQLDA INCLUDES integer1 SQLVAR ENTRIES,
+| BUT integer2 ARE REQUIRED BECAUSE AT
+| LEAST ONE OF THE COLUMNS BEING
+| DESCRIBED IS A DISTINCT TYPE
+| Explanation: Given that at least one of the columns being
+| described is a distinct type, space should be provided for the
+| extended SQLVAR entries in addition to the base SQLVAR
+| entries. The value of SQLN, integer1, indicates that there are
+| not enough SQLVAR entries for the base and extended
+| SQLVAR entries.
+| The total number of SQLVAR entries that are required
+| depends on whether USING BOTH was specified (n is the
+| number of columns being described):
+|  With USING BOTH, space should be allocated for 3n
+| SQLVAR entries.
+|  Otherwise, space should be allocated for 2n SQLVAR
+| entries.
+| The number of SQLVAR entries that are needed to return all of
+| the information about the columns is integer2.
+| Note: in the case of DESCRIBE INPUT, each reference to
+| column would actually be parameter.
+| System Action: DB2 has set the SQLDAID 7th byte flag "on"
+| because sufficient space was not provided for the extended
+| SQLVAR entries. The value of the 7th byte flag indicates how
+| many SQLVAR entries are needed for each column. Addi|
+tionally, because there were enough SQLVAR entries for the
+| base SQLVARs, DB2 HAS SET THE FIELDS OF THE base SQLVAR
+| ENTRIES. However, DB2 has not set any extended SQLVAR
+| entries.
+| Programmer Response: If there is no need for the additional
+| information about the distinct type(s), then no action is required
+| unless USING BOTH was specified (in which case additional
+| SQLVAR entries must be provided for the labels).
+| If the distinct type information is needed, the value of the
+| SQLN field in the SQLDA should be increased to integer2
+| (after making sure that the SQLDA is large enough to support
+| that amount) and the statement should be resubmitted.
+| 01594
+| +238 SQLDA INCLUDES integer1 SQLVAR ENTRIES,
+| BUT integer2 SQLVAR ENTRIES ARE NEEDED
+| FOR integer3 COLUMNS BECAUSE AT LEAST
+| ONE OF THE COLUMNS BEING DESCRIBED
+| IS A LOB
+| Explanation: Given that at least one the columns being
+| described is a LOB, space must be provided for the extended
+| SQLVAR entries in addition to the base SQLVAR entries. The
+| value of SQLN, integer1, indicates that there are not enough
+| SQLVAR entries for the base and extended SQLVAR entries.
+| One or more of the columns being described may be a distinct
+| type.
+| The total number of SQLVAR entries that are required
+| depends on whether USING BOTH was specified or not (n is
+| the number of columns being described which is integer3), and
+| whether the columns include any distinct types:
+|  With USING BOTH, and one or more distinct types, space
+| should be allocated for 3n SQLVAR entries.
+|  Otherwise, space should be allocated for 2n SQLVAR
+| entries.
+| The number of SQLVAR entries that are needed to return all of
+| the information about the columns is integer2.
+| Note: in the case of DESCRIBE INPUT, each reference to
+| column would actually be parameter.
+| System Action: DB2 has set the SQLDAID 7th byte flag "on"
+| because sufficient space was not provided for the extended
+| SQLVAR entries. The value of the 7th byte flag indicates how
+| many SQLVAR entries are needed for each column. DB2 has
+| not set any SQLVAR entries.
+| Programmer Response: Increase the value of the SQLN
+| field in the SQLDA to integer2 (after making sure that the
+| SQLDA is large enough to support that amount) and resubmit
+| the statement.
+| 01005
+| +239 SQLDA INCLUDES integer1 SQLVAR ENTRIES,
+| B
++304  +395
+|  Otherwise, space should be allocated for 2n SQLVAR
+| entries.
+| The number of SQLVAR entries that are needed to return all of
+| the information about the columns is integer2.
+| Note: in the case of DESCRIBE INPUT, each reference to
+| column would actually be parameter.
+| System Action: DB2 has set the SQLDAID 7th byte flag "on"
+| because sufficient space was not provided for the extended
+| SQLVAR entries. The value of the 7th byte flag indicates how
+| many SQLVAR entries are needed for each column. DB2 has
+| not set any SQLVAR entries. :elq.
+| Programmer Response: If the distinct type information is
+| needed, the value of the SQLN field in the SQLDA should be
+| increased to integer2 (after making sure the SQLDA is large
+| enough to support that amount) and the statement should be
+| resubmitted.
+| If there is no need for the additional information about the dis|
+tinct type(s) in the result set, then it is possible to resubmit the
+| statement only providing enough SQLVAR entries to accom|
+modate the number of columns being described (i.e. provide
+| the necessary number of base SQL entries).
+| 01005
++304 A VALUE WITH DATA TYPE data-type1
+CANNOT BE ASSIGNED TO A HOST VARIABLE
+BECAUSE THE VALUE IS NOT WITHIN
+THE RANGE OF THE HOST VARIABLE IN
+POSITION position-number WITH DATA TYPE
+data-type2
+Explanation: A FETCH or SELECT into a host variable list or
+structure, position number 'position-number' failed because
+the host variable having data type 'data-type2' was not large
+enough to hold the retrieved value having data type
+'data-type1'.
+System Action: The FETCH or SELECT could not return the
+data for the indicated SELECT item, the indicator variable is
+set to negative two (-2) to indicate a null value returned. Processing
+continues.
+Programmer Response: Verify that table definitions are
+current, and that the host variable has the proper data type.
+See the explanation for SQLCODE -405 for ranges of SQL
+data types.
+Destination: 01515
++331 THE NULL VALUE HAS BEEN ASSIGNED TO
+A HOST VARIABLE BECAUSE THE STRING
+CANNOT BE TRANSLATED. REASON reasoncode,
+CHARACTER code-point, HOST VARIABLE
+position-number
+Explanation: A string assigned to a host variable had to be
+translated from its coded character set to the coded character
+set of the host variable and an error occurred during the translation.
+The position-number is the ordinality of the host variable
+in the SQLDA. See the description of SQLCODE -331 for
+further information including the meaning of the reason-code
+and code-point.
+System Action: The host variable is unchanged and its indicator
+variable is set to -2 to indicate that a null value is
+returned. Execution of the statement continues as if the translation
+error had not occurred.
+Destination: 01520
++339 THE SQL STATEMENT HAS BEEN SUCCESSFULLY
+EXECUTED, BUT THERE MAY BE
+SOME CHARACTER CONVERSION INCONSISTENCIES
+Explanation: The application is connected to a DB2 Version
+2 Release 3 database server. The SQL statement is using an
+alias or three-part name, which refers to another DB2 subsystem
+that is at the Version 2 Release 2 level. DB2 Version 2
+Release 2 does not support character conversion. Since the
+execution of SQL statements from an EBCDIC DRDA
+requester to an EBCDIC Version 2 Release 2 DB2 server
+could require character conversion, a warning is generated. If
+the requester system CCSID is inconsistent with the DB2
+Version 2 Release 2 environment, most EBCDIC character
+code points match to the same character. Only certain special
+characters typically lead to data integrity concerns. Therefore,
+a warning is generated.
+System Action: The statement is successfully executed.
+Programmer Response: If the DB2 Version 2 Release 2
+table is accessed from other environments (different CCSID),
+incorrect results might occur (relative to what the other environment
+might expect). You should understand what characters
+might not be consistent with the DB2 Version 2 Release 2
+environment (its inherent CCSID) and avoid use of those characters
+or understand the exposure you face if you use them.
+System Programmer Response: If the application must refer
+to the Version 2 Release 2 subsystem data, the Version 2
+Release 2 DB2 subsystem can be migrated to Version 2
+Release 3 where character conversion is supported.
+Destination: 01569
+| +394 USER SPECIFIED OPTIMIZATION HINTS USED
+| DURING ACCESS PATH SELECTION
+| Explanation: Normal access path selection was bypassed in
+| favor of an access path specified in the PLAN_TABLE.
+| System Action: Processing continues normally.
+| Programmer Response: Ensure that the access path is
+| correct and produces the correct results.
+| Destination: 01629
+| +395 USER SPECIFIED OPTIMIZATION HINTS ARE
+| INVALID (REASON CODE = 'reason-code').
+| THE OPTIMIZATION HINTS ARE IGNORED.
+| Explanation: The optimization hints specified for this query
+| were found to be invalid. Using 'reason-code' and the fol|
+lowing table the specific reason the hints were invalidated can
+| be determined.
+| 'reason-code' Description
+| 1 Outer join not supported
+| 2 TABNO is invalid
+| 3 TNAME is not specified
+| 4 TNAME is ambiguous
+| 5 TABNO doesn't agree with TNAME
+| 6 QBLOCKNO doesn't agree with TNAME
+| 7 PAGE_RANGE is invalid
+| 8 PREFETCH is invalid
+ SQL Return Codes 23
++402  +462
+| 9 METHOD is invalid
+| 10 SORTN_JOIN is invalid
+| 11 SORTC_JOIN is invalid
+| 12 ACCESSTYPE is invalid
+| 13 ACCESSCREATOR or ACCESSNAME is
+| invalid
+| 14 TYPE 1 index can't be used with isolation
+| level 'UR'
+| 15 Specified index can't be used as
+| requested
+| 16 Multi-index access can't be done
+| 17 Invalid ACCESSTYPE combination
+| 18 METHOD specified for first table accessed
+| 19 Nested-loop join can't be done as
+| requested
+| 20 Merge join can't be done as requested
+| 21 Hybrid join can't be done as requested
+| 22 PARALLELISM_MODE requested can't be
+| done
+| 23 PARALLELISM_MODE is invalid
+| 24 ACCESS_DEGREE is invalid
+| 25 JOIN_DEGREE is invalid
+| 26 A table is missing
+| 27 A table is redundant
+| 28 PRIMARY_ACCESSTYPE is invalid
+| 29 ACCESS_PGROUP_ID is not specified
+| 30 JOIN_PGROUP_ID is not specified
+| 31 PARALLELISM_MODE is not specified
+| 32 CREATOR or TNAME is invalid
+| 33 Join sequence is incorrect
+| 34 Full outer join requires merge join method
+| 35 WHEN_OPTIMIZE is invalid or incon|
+sistent
+| 99 Unexpected error
+| System Action: The user specified optimization hints are
+| ignored. The access path is determined without the use of
+| hints and processing continues normally.
+| Programmer Response: Correct the problem with the opti|
+mization hints, or disable their use for this query.
+| Destination: 01628
++402 LOCATION location IS UNKNOWN
+Explanation: A remote object is referenced and either the
+table SYSIBM.LOCATIONS is not defined or the referenced
+'location' matches no entry in the
+SYSIBM.LOCATIONS.LOCATION column.
+System Action: For the CREATE ALIAS statement, the alias
+is created. For binding a plan or package with the
+VALIDATE(RUN) option, the plan or package is created.
+Destination: 01521
++403 THE LOCAL OBJECT REFERENCED BY THE
+CREATE ALIAS STATEMENT DOES NOT
+EXIST
+Explanation: The local object referenced by the CREATE
+ALIAS statement does not exist when creating the alias.
+System Action: The alias is created.
+Destination: 01522
+| +434 OPTION keyword IS A DEPRECATED
+| FEATURE
+| Explanation: keyword is a deprecated feature that will not be
+| supported in releases following DB2 Version 6. It is accepted,
+| but we recommend that you discontinue the use of this
+| keyword.
+| For indexes, we recommend that you use type 2 indexes
+| rather than type 1 indexes.
+| System Action: Processing continues normally.
+| Programmer Response: No change is required for the
+| current release. However, we recommend that you change
+| your SQL statement to remove this feature to prepare for
+| future releases when this feature is not supported.
+| Destination: 01608
+| +445 VALUE value HAS BEEN TRUNCATED
+| Explanation: The value value was truncated by a cast func|
+tion, which was called to transform the value in some way.
+| This is a warning situation. The cast function is a result of
+|  a CAST specification
+|  a built-in function such as CHAR, VARCHAR, etc.
+|  a CAST FROM specification on the CREATE FUNCTION
+| statement that created the function
+|  a user-defined function that is sourced on another function
+| and the result needed to be transformed.
+| If 'value' has the 'for bit data' subtype, then the 'value' is
+| printed as a hexadecimal string in quotes followed by an X.
+| System Action: The value has been truncated.
+| Programmer Response: Ensure that the output is as
+| expected and that the truncation has not caused any unex|
+pected consequences.
+| Destination: 01004
+| +462 EXTERNAL FUNCTION OR PROCEDURE name
+| (SPECIFIC NAME specific-name) HAS
+| RETURNED A WARNING SQLSTATE, WITH
+| DIAGNOSTIC TEXT text
+| Explanation: An SQLSTATE of the form 01Hxx was returned
+| to DB2 by user-defined function or procedure name, along with
+| message text text.
+| System Action: Processing continues.
+| Programmer Response: See your database administrator, or
+| the author of the function or procedure to find out the meaning
+| of the warning. The significance of the bad SQLSTATE to the
+| invoking application can be learned from the author of the
+| function or procedure.
+| Destination: 01Hxx
+24 Messages and Codes 
++464  +541
++464 PROCEDURE proc RETURNED num QUERY
+RESULT SETS, WHICH EXCEEDS THE
+DEFINED LIMIT integer
+Explanation: The stored procedure named by proc completed
+normally. However, the stored procedure exceeded the
+defined limit on the number of query result sets the procedure
+can return.
+ num identifies the number of query result sets returned by
+the stored procedure.
+ integer identifies the defined limit on the number of query
+result sets for the stored procedure.
+Only the first integer query result sets are returned to the SQL
+program that issued the SQL CALL statement.
+The possible causes are as follows:
+ The stored procedure is unable to return num result sets
+due to the limit defined for the procedure.
+ The stored procedure is unable to return num result sets
+due to the DRDA limitations imposed by the client. The
+DRDA client establishes this limit with the MAXRSLCNT
+DDM code point.
+System Action: The SQL statement is successful. The
+SQLWARN9 field is set to 'Z'.
+Destination: 0100E
+| +466 CREATE PROCEDURE proc RETURNED num
+| QUERY RESULTS SETS
+Explanation: The stored procedure named by proc completed
+normally. The procedure returned the number of SQL
+query result sets specified in num.
+System Action: The SQL statement is successful. The
+SQLWARN9 field is set to 'Z'.
+Destination: 0100D
++494 NUMBER OF RESULT SETS IS GREATER
+THAN NUMBER OF LOCATORS
+Explanation: The number of result set locators specified on
+the ASSOCIATE LOCATORS statement is less than the
+number of result sets returned by the stored procedure. The
+first "n" result set locator values are returned, where "n" is the
+number of result set locator variables specified on the SQL
+statement.
+System Action: The SQL statement is successful. The
+SQLWARN3 field is set to 'Z'.
+Programmer Response: Increase the number of result set
+locator variables specified on the SQL statement.
+Destination: 01614
+| +495 ESTIMATED PROCESSOR COST OF
+| estimate-amount1 PROCESSOR SECONDS
+| (estimate-amount2 SERVICE UNITS) IN COST
+| CATEGORY cost-category EXCEEDS A
+| RESOURCE LIMIT WARNING THRESHOLD OF
+| limit- amount SERVICE UNITS
+| Explanation: The prepare of a dynamic INSERT, UPDATE,
+| DELETE, or SELECT SQL statement resulted in a cost esti|
+mate that exceeded the warning threshold value specified in
+| the resource limit specification table (RLST). This warning is
+| also issued if DB2's cost category value was “B,” and the
+| default action specified in the RLF_CATEGORY_B column in
+| the RLST is to issue a warning.
+| estimate_amount1 The cost estimate (in processor seconds) if
+| the prepared INSERT, UPDATE, DELETE
+| or SELECT statement were to be executed.
+| estimate_amount2 The cost estimate (in service units) if the
+| prepared INSERT, UPDATE, DELETE or
+| SELECT statement were to be executed.
+| cost-category DB2's cost-category for this SQL statement.
+| The possible values are A or B.
+| limit-amount The warning threshold (in service units)
+| specified in the RLFASUWARN column of
+| the RLST.
+| System Action: The prepare of the dynamic INSERT,
+| UPDATE, DELETE, or SELECT statement was successful. An
+| SQLCODE -905 might be issued if the execution of the pre|
+pared statement exceeds the ASUTIME value specified in the
+| RLST.
+| Programmer Response: Ensure that there is application
+| logic to handle the warning to either allow the statement to
+| execute or to stop the statement from being executed. If this
+| SQLCODE was returned because the cost category value is
+| “B,” it might be that the statement is using parameter markers
+| or that some statistics are not available for the referenced
+| tables and columns. Make sure the administrator has run the
+| utility RUNSTATS on the referenced tables. It might also be
+| that UDFs will be invoked when the statement is executed, or
+| for INSERT, UPDATE, or DELETE statements that triggers are
+| defined on the changed table. Check the
+| DSN_STATEMNT_TABLE or the IFCID 22 record for this
+| statement to find the reasons this SQL statement has been put
+| in cost category “B.”
+| User Response: If the warning is caused by an SQL state|
+ment that is consuming too much processor resource, attempt
+| to rewrite the statement to perform more efficiently. Another
+| option is to ask the administrator to increase the warning
+| threshold value in the RLST.
+| Destination: 01616
++535 THE RESULT OF THE POSITIONED UPDATE
+OR DELETE MAY DEPEND ON THE ORDER
+OF THE ROWS
+Explanation: A positioned update of a primary key or a
+delete from a table with a self-referencing constraint was
+requested.
+System Action: DB2 executes the UPDATE or DELETE
+statement and the contents of the table are changed.
+Destination: 01591
++541 THE REFERENTIAL OR UNIQUE CONSTRAINT
+name HAS BEEN IGNORED BECAUSE IT IS A
+DUPLICATE
+Explanation: A FOREIGN KEY clause uses the same key
+and parent table as another FOREIGN KEY clause, or a
+UNIQUE clause uses the same column list as another
+UNIQUE clause. In either case, the duplicate clause is
+ignored. 'name' is either the foreign key name or the name of
+the first column in the constraint that is ignored.
+System Action: DB2 continues processing.
+ SQL Return Codes 25
++551  +610
+Programmer Response: If the duplication is an error, correct
+the statement and execute it again.
+Destination: 01543
++551 auth-id DOES NOT HAVE THE PRIVILEGE TO
+PERFORM OPERATION operation ON OBJECT
+object-name
+Explanation: Authorization ID 'auth-id' has attempted to
+perform the specified 'operation' on object 'object-name'
+without having been granted the proper authority to do so. This
+error might also occur if the specified object does not exist, if
+the object is a read-only view (for UPDATE or INSERT), or if
+'auth-id' is trying to create a table or view with an authorization
+ID other than its own. Only if your authorization ID is
+SYSADM, DBADM, or DBCTRL can you create a table or view
+from an 'auth-id' other than your own.
+If this error occurs while DB2 is creating or altering a table
+involving referential constraints, this code reports that the user
+does not have the necessary ALTER privilege to perform a
+FOREIGN KEY, DROP FOREIGN KEY, or DROP PRIMARY
+KEY operation. The 'object-name' identifies the object table of
+the CREATE or ALTER TABLE statement, not the table for
+which the user lacks the ALTER privilege.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, ensure that 'auth-id' has been granted the
+authority to perform the desired operation, that 'object-name '
+exists, and that 'auth-id' is not trying to create a table with a
+different authorization ID.
+Destination: 01548
++552 auth-id DOES NOT HAVE THE PRIVILEGE TO
+PERFORM OPERATION operation
+Explanation: Authorization ID 'auth-id' has attempted to
+perform the specified 'operation' without having been granted
+the authority to do so.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, ensure that the authorization-ID has been granted
+the authority necessary to perform the desired operation.
+Destination: 01542
++558 THE WITH GRANT OPTION IS IGNORED
+Explanation: The GRANT statement contained one of the following
+situations:
+ PUBLIC was within the list of 'grantee' authorization IDs.
+ BINDAGENT privilege was being granted.
+ ANY package privilege on collection-id.* was being
+granted.
+The WITH GRANT option may not be used in the above situations.
+System Action: The offending privilege(s) in the authorization
+specification are granted without the GRANT option. If the
+grantee is PUBLIC, all the privileges in the authorization specification
+are granted without the GRANT option.
+Destination: 01516
+| +561 THE ALTER, INDEX, REFERENCES, AND
+| TRIGGER PRIVILEGES CANNOT BE
+| GRANTED PUBLIC AT ALL LOCATIONS
+| Explanation: You specified a GRANT statement with either
+| an ALL or ALL PRIVILEGES keyword. ALL and ALL PRIVI|
+LEGES imply the granting of ALTER, INDEX, REFERENCES,
+| AND TRIGGER privileges that cannot be granted to a remote
+| user.
+| System Action: DB2 executes the GRANT statement.
+| However, it does not grant the ALTER, INDEX, REFER|
+ENCES, or TRIGGER privileges to PUBLIC*.
+Destination: 01523
++562 A GRANT OF A PRIVILEGE WAS IGNORED
+BECAUSE THE GRANTEE ALREADY HAS THE
+PRIVILEGE FROM THE GRANTOR
+Explanation: At least one of the privileges in the GRANT
+statement was ignored because the privilege was already
+granted to the grantee by the grantor.
+System Action: The privileges previously granted are
+ignored; all others are granted.
+Destination: 01560
+| +585 THE SCHEMA NAME schema-name APPEARS
+| MORE THAN ONCE IN THE CURRENT PATH
+| Explanation: The current path includes schema name more
+| than once.
+| System Action: The statement is executed.
+| Destination: 01625
+| +599 COMPARISON FUNCTIONS ARE NOT
+| CREATED FOR A DISTINCT TYPE BASED ON
+| A LONG STRING DATA TYPE
+| Explanation: Comparison functions are not created for a dis|
+tinct type based on a long string data type (BLOB, CLOB,
+| DBCLOB) since the corresponding function are not available
+| for these built-in data types.
+| System Action: The statement is processed successfully.
+| Programmer Response: No action is required.
+| Destination: 01596
++610 A CREATE/ALTER ON OBJECT object-name
+HAS PLACED OBJECT IN utility PENDING
+| Explanation: The identified object is in one of the following
+| states:
+#  REBUILD pending for an index
+| The index is in REBUILD PENDING status because
+| CREATE INDEX with DEFER was specified on a popu|
+lated table. The index is not generally available until the
+| index is removed from the REBUILD pending state.
+#  REORG pending for a table space partition
+| The table space is in REORG pending because ALTER
+| INDEX was used to change the limit key values. The table
+26 Messages and Codes 
++625  +655
+| space partition is not generally available until the REORG
+| pending status is removed.
+#  REORG pending for a table space
+# The table space is in REORG pending because ALTER
+# TABLE was used to add an identity column to a populated
+# table. The table space is not generally available until the
+# REORG pending status is removed.
+| System Action: The object was placed in the indicated
+| pending status.
+| Programmer Response: The following actions may be taken:
+|  For REBUILD pending on an index, use the REBUILD
+| INDEX utility to rebuild the index and remove the REBUILD
+| pending status.
+|  For REORG pending on a table space partition, perform
+| the following steps:
+| 1. Issue a DISPLAY DATABASE command for the table
+| space to identify which partitions are in REORG
+| pending.
+| 2. Run the REORG utility on the partitions that are in
+| REORG pending.
+#  For REORG pending on a table space, run the REORG
+# utility on the table space.
+Destination: 01566
++625 THE DEFINITION OF TABLE table-name HAS
+BEEN CHANGED TO INCOMPLETE
+Explanation: This warning code is used to report that the
+definition of the indicated table is incomplete because DROP
+INDEX was used to drop its primary index. The table is not
+generally available until a new primary index is created.
+System Action: The definition of the table is marked as
+incomplete. Subsequent SQL references to the table, except to
+grant or revoke privileges on it, will cause SQLCODE -540 to
+be returned. Attempts to run already bound plans referencing
+the table will result in SQLCODE -904 or -923 with resource
+unavailable reason code 00C9009F. CHECK and LOAD utilities
+involving the table are not allowed. If they are used, you
+will receive message DSNU305I or DSNT500I with reason
+code 00C9009F. Utilities other than CHECK and LOAD are
+allowed.
+Programmer Response: Recreate the primary index using
+CREATE INDEX. This will remove the table from INCOMPLETE
+DEFINITION status.
+Note: The reason that a primary index may need to be
+dropped and recreated is to change the STOGROUP or
+SUBPAGES parameters of the index.
+Destination: 01518
++626 DROPPING THE INDEX TERMINATES
+ENFORCEMENT OF THE UNIQUENESS OF A
+KEY THAT WAS DEFINED WHEN THE TABLE
+WAS CREATED
+Explanation: The index was created to enforce the uniqueness
+of a key that was defined as UNIQUE when the table was
+created. Dropping the index terminates enforcement of the
+unique constraint by DB2.
+System Action: The index is dropped.
+Programmer Response: If the unique constraint is still
+intended to apply, create a new unique index with the same
+key as the dropped index.
+Destination: 01529
++645 WHERE NOT NULL IS IGNORED BECAUSE
+THE INDEX KEY CANNOT CONTAIN NULL
+VALUES
+Explanation: The WHERE NOT NULL clause is ignored on
+the CREATE INDEX statement because the index key is
+defined on columns that cannot contain null values.
+System Action: The option is ignored; processing continues.
+Programmer Response: Remove the WHERE NOT NULL
+clause to get rid of the warning.
+Destination: 01528
++650 THE TABLE BEING CREATED OR ALTERED
+CANNOT BECOME A DEPENDENT TABLE
+Explanation: This table is defined with the maximum number
+of columns. It cannot be altered to be a dependent table later.
+System Action: The table is created. Check to see if the
+table will become a dependent table at a later time. If yes, drop
+and recreate the table with fewer than 750 columns.
+Destination: 01538
++653 TABLE table-name IN PARTITIONED
+TABLESPACE tspace-name IS NOT AVAILABLE
+BECAUSE ITS PARTITIONED INDEX
+HAS NOT BEEN CREATED
+Explanation: An attempt has been made to insert or manipulate
+data in or create a view on a partitioned table (that is, a
+table residing in a partitioned table space) before the partitioned
+index for that table has been created.
+A table residing in a partitioned table space cannot be referenced
+in any SQL manipulative statement or a CREATE VIEW
+statement before the partitioned index for that table has been
+created.
+System Action: A valid plan or package will be created if no
+errors are detected. The statement is bound dynamically on
+each execution of the statement.
+Programmer Response: For better performance, rebind the
+plan or package after correcting the statement. To correct the
+statement, verify that the correct table was specified in the
+statement. If so, ensure that the partitioned index for the table
+has been created successfully before attempting to execute
+any SQL manipulative statements that reference that table.
+Destination: 01551
++655 STOGROUP stogroup_name HAS BOTH SPECIFIC
+AND NON-SPECIFIC VOLUME IDS. IT
+WILL NOT BE ALLOWED IN FUTURE
+RELEASES
+Explanation: The CREATE/ALTER STOGROUP statement
+has caused the STOGROUP with 'stogroup_name' to have
+both specific and non-specific ('*') volume Ids. This warning
+code is used to specify that the mixing of different types of
+volume Ids will not be allowed in future releases.
+System Action: DB2 continues processing.
+ SQL Return Codes 27
++658  +802
+Programmer Response: Plan to use either specific or nonspecific
+volume ids to avoid future release migration impact.
+ALTER STOGROUP may be used to drop all specific volume
+ids or all non-specific volume ids.
+Destination: 01597
++658 THE SUBPAGES VALUE IS IGNORED FOR
+THE CATALOG INDEX index-name
+Explanation: Only SUBPAGES 1 is allowed for this catalog
+index.
+System Action: The index was altered successfully using
+SUBPAGES 1. If you are also altering the TYPE option to a
+new value, the index is placed in recovery pending status.
+Destination: 01600
++664 THE INTERNAL LENGTH OF THE LIMIT-KEY
+FIELDS FOR THE PARTITIONED INDEX indexname
+EXCEEDS THE LENGTH IMPOSED BY
+THE INDEX MANAGER
+| Explanation: The ALTER INDEX statement can change a
+| limit key for the partitioned index (that is, the cluster index for a
+| table residing in a partitioned table space), and the length of
+| the limit key exceeds the permitted maximum.
+| The index manager restricts the internal length of the limit keys
+| for a partitioned index to a maximum of 40 bytes. The sum of
+| the internal lengths of the limit keys specified in the PART
+| clause of the ALTER INDEX statement exceeds that 40-byte
+| maximum. The limit key was truncated to 40 bytes.
+System Action: The specified index was altered but the limit
+key was truncated to 40 bytes.
+Destination: 01540
++738 DEFINITION CHANGE OF object object_name
+MAY REQUIRE SIMILAR CHANGE ON
+READ-ONLY SYSTEMS
+Explanation: A change was made to the definition of the
+specified object that may also require a similar change to any
+read-only shared systems.
+System Action: The statement is successfully executed.
+Programmer Response: Check the read-only shared
+systems that have the specified object defined, and determine
+if a change must be made to the object on those systems.
+Destination: 01530
+| +799 A SET STATEMENT REFERENCES A SPECIAL
+| REGISTER THAT DOES NOT EXIST AT THE
+| SERVER SITE
+| Explanation: A DB2 server received a SET statement that it
+| does not understand.
+| System Action: The SET SPECIAL REGISTER request is
+| ignored.
+| Programmer Response: This SQLCODE can be returned to
+| an application for any SQL statement. This SQLCODE may be
+| masked by other negative SQLCODEs that the SQL statement
+| receives. Processing continues at the server.
+| Destination: 01527
++802 EXCEPTION ERROR exception-type HAS
+OCCURRED DURING operation-type OPERATION
+ON data-type DATA, POSITION positionnumber
+| Explanation: The exception error 'exception-type' occurred
+| while doing an ADDITION, SUBTRACTION, MULTIPLI|
+CATION, DIVISION, NEGATION, or BUILT-IN FUNCTION
+| operation on a field whose 'data-type' is DECIMAL, FLOAT,
+| SMALLINT, or INTEGER. The error occurred while processing
+| an arithmetic expression in the SELECT list of an outer
+| SELECT statement, and the position in the select list is
+| denoted by 'position-number'. The possible exception types
+| are FIXED POINT OVERFLOW, DECIMAL OVERFLOW,
+| DIVIDE EXCEPTION, EXPONENT OVERFLOW, ZERO
+| DIVIDE, or OUT OF RANGE. The data type displayed in the
+| message may indicate the data type of the temporary internal
+| copy of the data, which may differ from the actual column or
+| literal data type due to conversions by DB2.
+A fixed point overflow can occur during any arithmetic operation
+on either INTEGER or SMALLINT fields.
+A decimal overflow exception can occur when one or more
+nonzero digits are lost because the destination field in any
+decimal operation is too short to contain the result.
+A divide exception can occur on a decimal division operation
+when the quotient exceeds the specified data-field size. A zero
+divide exception occurs on any division by zero.
+An exponent overflow can occur when the result characteristic
+of any floating-point operation exceeds 127 and the result fraction
+is not zero, i.e. the magnitude of the result exceeds
+approximately 7.2E+75.
+| Any of the exceptions/overflows can occur during the proc|
+essing of a Built-In Function. If the 'operation-type' is FUNC|
+TION then the error occurred while processing either an input,
+| intermediate, or final value. The cause could be that the value
+| of a parameter is out of range.
+Note: Parts of 'exception-type', 'data-type',
+'operation-type', and 'position-number' may or may
+not be returned in SQLCA, depending upon when the
+error was detected.
+System Action: For each expression in error the indicator
+variable is set to negative two (-2) to indicate a null value
+returned. The data variable is unchanged. Execution of the
+statement continues with all nonerror columns and expressions
+of the outer SELECT list being returned. If the statement is
+cursor controlled then the CURSOR will remain open.
+Programmer Response: Examine the expression for which
+the warning occurred to see if the cause (or the likely cause) of
+the problem can be determined. The problem may be datadependent,
+in which case it will be necessary to examine the
+data that was being processed at the time the error occurred.
+See the explanation of SQLCODE -405 for allowed ranges of
+numeric data types.
+Destination: 01519
+28 Messages and Codes 
++806  +20007
++806 BIND ISOLATION LEVEL RR CONFLICTS WITH
+TABLESPACE LOCKSIZE PAGE OR
+LOCKSIZE ROW AND LOCKMAX 0
+Explanation: The specification of isolation level RR is incompatible
+with the LOCKSIZE PAGE or LOCKSIZE ROW and
+LOCKMAX 0 specification for a table space accessed by the
+application. Table space locking is used to protect the integrity
+of the application.
+System Action: A valid package/plan is created if no errors
+are detected. Table space locking is used. RR isolation level is
+preserved.
+Programmer Response: If you do not want table space
+locking, use isolation level UR, CS, or RS.
+Destination: 01553
++807 THE RESULT OF DECIMAL MULTIPLICATION
+MAY CAUSE OVERFLOW
+Explanation: An arithmetic expression contains a decimal
+multiplication that may cause an overflow condition when the
+statement is executed. The problem may be corrected by
+restructuring the arithmetic expression so that decimal multiplication
+precedes decimal division or by changing the precision
+and scale of the operands in the arithmetic expression. Refer
+to Chapter 3 of DB2 SQL Reference for the precision and
+scale of the decimal multiplication and division results.
+System Action: A valid package will be created if no errors
+are detected.
+Destination: 01554
++863 THE CONNECTION WAS SUCCESSFUL BUT
+ONLY SBCS WILL BE SUPPORTED
+Explanation: The target AS supports only the DB2 SBCS
+CCSID. The DB2 Mixed CCSID or GRAPHIC CCSID or both
+are not supported by the target AS. DB2 character data sent to
+the target AS must be restricted to SBCS.
+System Action: The CONNECT statement is successful. The
+release level of the target AS has been placed into the
+SQLERRP field of the SQLCA (see DB2 SQL Reference for
+the CONNECT statement).
+Programmer Response: Do not execute any SQL statements
+which pass either mixed data or graphic data as input
+host variables.
+Destination: 01539
+# +883 ROLLBACK TO SAVEPOINT OCCURED WHEN
+# THERE WERE OPERATIONS THAT CANNOT
+# BE UNDONE, OR AN OPERATION THAT
+# CANNOT BE UNDONE WAS PERFORMED
+# WHEN THERE WAS A SAVEPOINT OUT#
+STANDING
+# Explanation: The operations that are referred to are updates
+# (inserts into or deletes from) a created global temporary table.
+# If this SQL warning code is received as the result of a
+# ROLLBACK TO SAVEPOINT statement, the rollback is per#
+formed; however, the changes that were made to the tempo#
+rary table are not undone. If this SQL warning code is received
+# as the result of an operation to a created global temporary
+# table, the operation is performed; however, be advised that a
+# savepoint is outstanding, and the update will not be backed out
+# if a rollback to the savepoint is performed.
+# System Action: The SQL statement is executed.
+# Programmer Response: Verify that this is what you meant.
+# Destination: 01640
++2000 TYPE 1 INDEXES WITH SUBPAGES GREATER
+THAN 1 CANNOT BECOME GROUP BUFFER
+POOL DEPENDENT IN A DATA SHARING
+ENVIRONMENT
+Explanation: A SUBPAGES value of greater than 1 was
+specified on a CREATE INDEX or ALTER INDEX statement in
+a data sharing environment. Type 1 indexes with a SUBPAGES
+value greater than 1 can only be accessed in a data
+sharing environment in non-group buffer pool dependent mode.
+Any read or update request that would cause the index to
+become group buffer pool dependent will be denied with a
+'resource unavailable' condition. Only type 2 indexes or type
+1 indexes with SUBPAGES 1 can become group buffer pool
+dependent.
+System Action: The statement is successfully executed. If
+ALTER INDEX was performed, then the index is placed in
+recovery pending status.
+Destination: 016838
+| +20002 THE GBPCACHE SPECIFICATION IS
+| IGNORED, bpname DOES NOT ALLOW
+| CACHING
+| Explanation: This message is issued in response to a
+| CREATE or ALTER of a table space or index is which a buffer
+| pool is named that corresponds to a group buffer pool that is
+| defined with GBPCACHE NO. The corresponding group buffer
+| pool is used only for cross-invalidation. It contains no data
+| entries. All reads and writes are from and to DASD.
+| System Action: The statement is processed.
+| User Response: If you want to use one of the GBPCACHE
+| options other than NONE, you must alter the table space or
+| index to use a group buffer pool that is defined with
+| GBPCACHE YES.
+| Destination: 01624
+| +20007 USE OF OPTIMIZATION HINTS IS DISAL|
+LOWED BY A DB2 SUBSYSTEM PARAMETER.
+| THE SPECIAL REGISTER 'OPTIMIZATION
+| HINT' IS SET TO THE DEFAULT VALUE OF
+| BLANKS.
+| Explanation: DB2 is not enabled to use optimization hints.
+| The special register OPTIMIZATION HINT is set to the default
+| value of blanks.
+| System Action: Processing continues normally using the
+| default OPTIMIZATION HINT value. The user specified opti|
+mization hints are ignored. The access path is determined
+| without the use of hints and processing continues normally.
+| Programmer Response: Enable the use of OPTIMIZATION
+| HINT by changing the value of OPTIMIZATION HINTS on the
+| DB2 Installation panel DSNTIP4.
+| If, after further consideration, you do not want to use OPTI|
+MIZATION HINT, change or remove the SET CURRENT OPTI|
+MIZATION HINT statement.
+| Destination: 01602
+ SQL Return Codes 29
++20122  +30100
+# +20122 DEFINE NO OPTION IS NOT APPLICABLE IN
+# THE CONTEXT SPECIFIED
+# Explanation: The DEFINE NO option was specified, however
+# it is not applicable in the context specified. DEFINE NO was
+# specified in one of the following situations:
+#  a CREATE INDEX statement that included the VCAT
+# clause
+#  a CREATE INDEX statement for a non-empty table
+#  a CREATE LOB TABLESPACE statement
+#  a CREATE TABLESPACE statement that included the
+# VCAT clause
+# System Action: DB2 ignored the DEFINE NO option and
+# created the object with the DEFINE YES option instead.
+# Destination: 01644
++30100 OPERATION COMPLETED SUCCESSFULLY
+BUT A DISTRIBUTION PROTOCOL VIOLATION
+HAS BEEN DETECTED. ORIGINAL
+SQLCODE=original-sqlcode AND ORIGINAL
+SQLSTATE=original-sqlstate
+Explanation: The application requested operation (either
+COMMIT or ROLLBACK) has completed successfully but the
+response from the remote server and the SQLCODE that was
+returned from the remote server are inconsistent. For example,
+the reply message from the remote server indicates that a
+COMMIT operation completed successfully but the SQLCODE
+returned from the AS was negative.
+System Action: An alert was generated. A DSNL031I
+message may have been written to the console. Refer to the
+description of this message for further information.
+The SQLCODE returned by the remote server is replaced with
++30100 and the SQLSTATE returned by the remote server is
+replaced with 01558.
+The SQLCODE and SQLSTATE values that were returned
+from the AS are stored in the SQLERRM field in a string of the
+following format:
+'original-sqlcode 'FF'X original-sqlstate'
+Programmer Response: Notify the System Programmer for
+assistance in analyzing the trace data that was generated.
+Destination: 01558
