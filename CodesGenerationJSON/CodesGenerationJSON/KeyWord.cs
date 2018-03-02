@@ -11,5 +11,6 @@
         public const string DESTINATION = "Destination";
         public const string SYSTEM_ACTION = "System Action";
         public const string NOTE = "Note";
+        public const string SQL_ERRO = "Error SQL codes";
     }
 }

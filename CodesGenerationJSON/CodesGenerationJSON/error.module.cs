@@ -12,6 +12,8 @@
         private int searchs;
         private string note;
 
+        public Error() { }
+
 		public Error(int id, string code, string description, string explanation, string sys_action, string programer_resp, 
             string sql_s, string note)
         {
