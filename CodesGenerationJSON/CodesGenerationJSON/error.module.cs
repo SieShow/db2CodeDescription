@@ -12,7 +12,16 @@
         private int searchs;
         private string note;
 
-        public Error() { }
+        public Error()
+        {
+            this.code = "";
+            this.description = "";
+            this.explanation = "";
+            this.system_action = "";
+            this.programmer_response = "";
+            this.sql_state = "";
+            this.note = "";
+        }
 
 		public Error(int id, string code, string description, string explanation, string sys_action, string programer_resp, 
             string sql_s, string note)

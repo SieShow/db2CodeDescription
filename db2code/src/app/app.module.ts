@@ -4,11 +4,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { HeaderComponent } from './header/header.component';
+import { ContentComponent } from './content/content.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
