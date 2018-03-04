@@ -1,1 +1,11 @@
-<sqlc-content></sqlc-content>
+<div class="container mt-4 p-4 w-75">
+  <form [formGroup]="searchForm">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Text a SQL code!" autocomplete="off" formControlName="searchControl">
+    </mat-form-field>
+  </form>
+</div>
+<sqlc-code-card></sqlc-code-card>
+<sqlc-code-card></sqlc-code-card>
+<sqlc-code-card></sqlc-code-card>
+<sqlc-code-card></sqlc-code-card>

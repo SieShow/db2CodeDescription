@@ -4,17 +4,24 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { HeaderComponent } from './header/header.component';
-import { ContentComponent } from './content/content.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CodeCardComponent } from './codes/code-card/code-card.component';
+import { CodeDetailComponent } from './codes/code-detail/code-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    ContentComponent
+    CodeCardComponent,
+    CodeDetailComponent
   ],
   imports: [
     BrowserModule,
     AngularMaterialModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
