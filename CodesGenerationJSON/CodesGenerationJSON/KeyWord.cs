@@ -5,6 +5,7 @@
     /// </summary>
     public class KeyWord
     {
+        public const string CODE = "code";
         public const string DESCRIPTION = "Description:";
         public const string EXPLANATION = "Explanation:";
         public const string PROGRAMER_RESPONSE = "Programmer Response:";
