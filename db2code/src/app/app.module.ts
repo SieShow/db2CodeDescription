@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CodeCardComponent } from './codes/code-card/code-card.component';
 import { CodeDetailComponent } from './codes/code-detail/code-detail.component';
+import { ROUTES } from './app.routes';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { CodeDetailComponent } from './codes/code-detail/code-detail.component';
     BrowserModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
   ],
   providers: [],
   bootstrap: [AppComponent]
