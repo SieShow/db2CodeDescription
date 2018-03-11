@@ -1,4 +1,4 @@
-import { SetStatus } from './../enuns/setStatus';
+import { SetStatus } from './../enuns/global';
 
 export class ErrorModel {
     private id?: number;
@@ -25,12 +25,20 @@ export class ErrorModel {
         this.id = value;
     }
 
+    public appendId(value: number): void {
+        this.id += value;
+    }
+
     public get $code(): string {
         return this.code;
     }
 
     public set $code(value: string) {
         this.code = value;
+    }
+
+    public appendCode(value: string): void {
+        this.code.concat(value);
     }
 
     public get $destination(): string {
@@ -41,12 +49,20 @@ export class ErrorModel {
         this.destination = value;
     }
 
+    public appendDestination(value: string): void {
+        this.description.concat(value);
+    }
+
     public get $description(): string {
         return this.description;
     }
 
     public set $description(value: string) {
         this.description = value;
+    }
+
+    public appendDescription(value: string): void {
+        this.description.concat(value);
     }
 
     public get $explanation(): string {
@@ -57,12 +73,20 @@ export class ErrorModel {
         this.explanation = value;
     }
 
+    public appendExplanation(value: string): void {
+        this.explanation.concat(value);
+    }
+
     public get $system_action(): string {
         return this.system_action;
     }
 
     public set $system_action(value: string) {
         this.system_action = value;
+    }
+
+    public appendSystemAction(value: string): void {
+        this.system_action.concat(value);
     }
 
     public get $programmer_response(): string {
@@ -73,12 +97,20 @@ export class ErrorModel {
         this.programmer_response = value;
     }
 
+    public appendProgrammerResponse(value: string): void {
+        this.programmer_response.concat(value);
+    }
+
     public get $sql_state(): string {
         return this.sql_state;
     }
 
     public set $sql_state(value: string) {
         this.sql_state = value;
+    }
+
+    public appendSqlState(value: string): void {
+        this.sql_state.concat(value);
     }
 
     public get $searchs(): number {
@@ -97,6 +129,9 @@ export class ErrorModel {
         this.note = value;
     }
 
+    public appendNote(value: string): void {
+        this.note.concat(value);
+    }
     public get $setStatus(): SetStatus {
         return this.setStatus;
     }
