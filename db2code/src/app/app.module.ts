@@ -10,6 +10,7 @@ import { CodeCardComponent } from './codes/code-card/code-card.component';
 import { CodeDetailComponent } from './codes/code-detail/code-detail.component';
 import { ROUTES } from './app.routes';
 import { RouterModule, PreloadAllModules } from '@angular/router';
+import { ReaderComponent } from './file-reader/reader/reader.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RouterModule, PreloadAllModules } from '@angular/router';
     HomeComponent,
     HeaderComponent,
     CodeCardComponent,
-    CodeDetailComponent
+    CodeDetailComponent,
+    ReaderComponent
   ],
   imports: [
     BrowserModule,

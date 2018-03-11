@@ -1,0 +1,10 @@
+<div class="card w-75 h-100 container mt-3 p-2 div-element">
+  <div class="input-group mb-3">
+    <label for="file-upload" class="custom-file-upload">
+      <i class="fa fa-cloud-upload"></i> Selecionar arquivo
+    </label>
+    <input id="file-upload" class="button" type="file" accept=".txt" (change)="fileUpload($event)">
+  </div>
+  <mat-progress-bar mode="determinate" value="{{actualline}}"></mat-progress-bar>
+  <textarea rows="4" cols="50">{{fileText}}</textarea>
+</div>

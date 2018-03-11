@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
     });
 
     this.searchControl.valueChanges
-        .debounceTime(500)
-        .distinctUntilChanged()
-        .subscribe(val => console.log(val));
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .subscribe(val => console.log(val));
   }
 }
