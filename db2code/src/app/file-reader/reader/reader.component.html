@@ -5,6 +5,6 @@
     </label>
     <input id="file-upload" class="button" type="file" accept=".txt" (change)="fileUpload($event)">
   </div>
-  <mat-progress-bar mode="determinate" value="{{actualline}}"></mat-progress-bar>
-  <textarea rows="4" cols="50">{{fileText}}</textarea>
+  <mat-progress-bar mode="determinate" value="{{fileservice.actualline}}"></mat-progress-bar>
+  <textarea rows="4" cols="50">{{fileservice.fileText}}</textarea>
 </div>

@@ -8,17 +8,18 @@ import { Injectable } from '@angular/core';
  * @class FileService
  * @version 1.0
  * @author lgmagalhes
- * @howToUse
- *
- *
+ * @description This service class has the intent to read a IBM SQL codes file
+ * and create a JSON file with all informations about the sql erros code.
+ * @prop This class has as objective solve only one problem of file reading. If
+ * you find any other purpose for this, feel free to customize
  */
 @Injectable()
 export class FileService {
 
-    private fileText: string;
-    private codeElements: ErrorModel[];
-    public actualline = 0;
-    private totalLines: number;
+    fileText: string;
+    codeElements: ErrorModel[];
+    actualline = 0;
+    totalLines: number;
 
     /* Code block used to define if a attribute was already defined or not */
     private statusForDestination = SetStatus.NOTSETTED;
@@ -144,6 +145,7 @@ export class FileService {
                     }
                 }
             }
+            this.resetAtributeStatus();
             errorObj = new ErrorModel();
         }
     }
@@ -158,12 +160,7 @@ export class FileService {
      */
     private checkIfIsCodeInPage(line: string): boolean {
         const splited = line.split(' ');
-        if (splited.length > 1) {
-            if (splited[1].length === splited[splited.length - 1].length) {
-                return true;
-            }
-        }
-        return false;
+        return splited.length > 1 && splited[1].length === splited[splited.length - 1].length ? true : false;
     }
 
     /**
@@ -171,7 +168,11 @@ export class FileService {
      *
      * The description of some attribute ends when is made a break line or the first word of the next line is one
      * of the possible types of attributes
+     *
      * @param line
+     * @returns TRUE if the nextline if empty or null.
+     * @returns FALSE if the attribute is still being filled
+     * @returns NULL if none of the previous options was accepted
      */
     private isInformationFinished(nextline: string): boolean {
         const splited = nextline.split(' ');
@@ -193,12 +194,7 @@ export class FileService {
      * @param line
      */
     private isFullLineString(line: string): boolean {
-        try {
-            const aux = +line;
-            return false;
-        } catch (e) {
-            return true;
-        }
+        return !isNaN(+line);
     }
 
     /**
@@ -209,39 +205,20 @@ export class FileService {
      * @param line
      */
     private checkIfIsCode(line: string): boolean {
-        try {
-            const aux = +line;
-            return true;
-        } catch (e) {
-            if (line.length <= 8) {
-                return true;
-            }
-            return false;
-        }
+        return isNaN(+line) || line.length <= 8 ? true : false;
     }
 
     /**
-     * Checks if the line represents a page
+     * Get code from a line if it's represents a page code
      *
-     * Lines representing a page have the follow structure:
+     * Lines representing a page have the follow structure i.e:
      * "DSNB320I  DSNB325A".
      *
-     * They show what is the first code error that will be described, and the last
+     * They(start page) show what is the first code error that will be described, and the last
+     *
      * @param words line of the file
      */
-    private checkPaginationLine(words: string[]): string {
-        let numberObj = Number.MIN_VALUE;
-
-        words.forEach(element => {
-            try {
-                numberObj = +element;
-                if (numberObj !== Number.MIN_VALUE) {
-                    return element;
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        });
-        return null;
+    private getPaginationLine(words: string[]): string {
+        return words[words.length - 1];
     }
 }

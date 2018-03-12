@@ -11,6 +11,7 @@ import { CodeDetailComponent } from './codes/code-detail/code-detail.component';
 import { ROUTES } from './app.routes';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { ReaderComponent } from './file-reader/reader/reader.component';
+import { FileService } from './file-reader/modules/file.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ReaderComponent } from './file-reader/reader/reader.component';
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
   ],
-  providers: [],
+  providers: [FileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

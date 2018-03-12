@@ -1,4 +1,4 @@
-import { FileService } from './../modules/error.service';
+import { FileService } from './../modules/file.service';
 import { KeyConsts } from './../enuns/global';
 import { ErrorModel } from './../modules/error.model.clss';
 import { Component, OnInit } from '@angular/core';
@@ -11,9 +11,9 @@ import { SetStatus } from '../enuns/global';
 })
 export class ReaderComponent implements OnInit {
 
-  private fileText: string;
-  private codeElements: ErrorModel[];
-  public actualline = 0;
+  fileText: string;
+  codeElements: ErrorModel[];
+  actualline = 0;
 
   constructor(private fileservice: FileService) { }
 
