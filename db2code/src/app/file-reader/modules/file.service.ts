@@ -97,50 +97,49 @@ export class FileService {
                     errorObj.$code = lineText;
 
                     /* Check if is destination */
-                } else if (splited[0] === KeyConsts.DESTINATION || this.statusForDestination.valueOf === SetStatus.READING.valueOf) {
+                } else if (splited[0] === KeyConsts.DESTINATION || this.statusForDestination === SetStatus.READING) {
 
                     errorObj.$destination = splited[1];
                     this.statusForDestination = SetStatus.READING;
 
                     /* Check if is explanation */
-                } else if (splited[0] === KeyConsts.EXPLANATION || this.statusForExplanation.valueOf === SetStatus.READING.valueOf) {
+                } else if (splited[0] === KeyConsts.EXPLANATION || this.statusForExplanation === SetStatus.READING) {
 
                     errorObj.appendExplanation(splited[1]);
                     this.statusForExplanation = SetStatus.READING;
 
-                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1])) {
+                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1].split(' '))) {
                         this.statusForDestination = SetStatus.FINISHED;
                     }
 
                     /* Check if is system_action */
-                } else if (splited[0] === KeyConsts.SYSTEM_ACTION || this.statusForSystemAction.valueOf === SetStatus.READING.valueOf) {
+                } else if (splited[0] === KeyConsts.SYSTEM_ACTION || this.statusForSystemAction === SetStatus.READING) {
 
                     errorObj.appendSystemAction(splited[1]);
                     this.statusForSystemAction = SetStatus.READING;
 
-                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1])) {
+                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1].split(' '))) {
                         this.statusForSystemAction = SetStatus.FINISHED;
                     }
 
                     /* check if is programer_response */
-                } else if (splited[0] === KeyConsts.PROGRAMER_RESPONSE ||
-                    this.statusForProgramerResponse.valueOf === SetStatus.READING.valueOf
+                } else if (splited[0] === KeyConsts.PROGRAMER_RESPONSE || this.statusForProgramerResponse === SetStatus.READING
                     || splited[0] === KeyConsts.SYSTEM_PROGRAMER_RESPONSE) {
 
                     errorObj.appendProgrammerResponse(splited[1]);
                     this.statusForProgramerResponse = SetStatus.READING;
 
-                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1])) {
+                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1].split(' '))) {
                         this.statusForProgramerResponse = SetStatus.FINISHED;
                     }
 
                     /* if it's belong to no one, so it's a description */
-                } else if (this.isFullLineString(lineText) || this.statusForDescription.valueOf === SetStatus.READING.valueOf) {
+                } else if (this.isFullLineString(lineText) || this.statusForDescription === SetStatus.READING) {
 
                     errorObj.appendDescription(splited[1]);
                     this.statusForDescription = SetStatus.READING;
 
-                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1])) {
+                    if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1].split(' '))) {
                         this.statusForDescription = SetStatus.FINISHED;
                     }
                 }
@@ -158,9 +157,8 @@ export class FileService {
      * the next block of description and explanations refers to the code DSNB325A
      * @param line
      */
-    private checkIfIsCodeInPage(line: string): boolean {
-        const splited = line.split(' ');
-        return splited.length > 1 && splited[1].length === splited[splited.length - 1].length ? true : false;
+    private checkIfIsCodeInPage(line: string[]): boolean {
+      return line.length > 1 && line[1].length === line[line.length - 1].length;
     }
 
     /**
@@ -174,13 +172,12 @@ export class FileService {
      * @returns FALSE if the attribute is still being filled
      * @returns NULL if none of the previous options was accepted
      */
-    private isInformationFinished(nextline: string): boolean {
-        const splited = nextline.split(' ');
-        if (nextline === null || nextline === '') {
+    private isInformationFinished(nextline: string[]): boolean {
+        if (nextline === null || nextline.length === 0) {
             return true;
-        } else if (splited[0] === KeyConsts.DESTINATION || splited[0] === KeyConsts.EXPLANATION
-            || splited[0] === KeyConsts.SYSTEM_ACTION || splited[0] === KeyConsts.PROGRAMER_RESPONSE
-            || splited[0] === KeyConsts.SYSTEM_PROGRAMER_RESPONSE) {
+        } else if (nextline[0] === KeyConsts.DESTINATION || nextline[0] === KeyConsts.EXPLANATION
+          || nextline[0] === KeyConsts.SYSTEM_ACTION || nextline[0] === KeyConsts.PROGRAMER_RESPONSE
+          || nextline[0] === KeyConsts.SYSTEM_PROGRAMER_RESPONSE) {
             return true;
         }
         return null;
@@ -205,7 +202,7 @@ export class FileService {
      * @param line
      */
     private checkIfIsCode(line: string): boolean {
-        return isNaN(+line) || line.length <= 8 ? true : false;
+        return !isNaN(+line) || line.length <= 8;
     }
 
     /**
