@@ -89,7 +89,7 @@ export class FileService {
             this.getPercentage(line + 1);
             this.codeElements.push(errorObj);
 
-            if (lineText !== '' || lineText !== null) {
+            if (lineText !== "" && lineText !== null) {
 
                 /* check if is code */
                 if (this.checkIfIsCode(lineText)) {
@@ -136,7 +136,7 @@ export class FileService {
                     /* if it's belong to no one, so it's a description */
                 } else if (this.isFullLineString(lineText) || this.statusForDescription === SetStatus.READING) {
 
-                    errorObj.appendDescription(splited[1]);
+                    errorObj.appendDescription(lineText);
                     this.statusForDescription = SetStatus.READING;
 
                     if (line + 1 < lines.length && this.isInformationFinished(lines[line + 1].split(' '))) {
@@ -144,8 +144,8 @@ export class FileService {
                     }
                 }
             }
-            this.resetAtributeStatus();
-            errorObj = new ErrorModel();
+             /*this.resetAtributeStatus();
+            errorObj = new ErrorModel();*/
         }
     }
 
@@ -191,7 +191,7 @@ export class FileService {
      * @param line
      */
     private isFullLineString(line: string): boolean {
-        return !isNaN(+line);
+        return isNaN(+line);
     }
 
     /**
